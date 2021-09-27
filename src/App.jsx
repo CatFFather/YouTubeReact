@@ -1,9 +1,20 @@
-import './app.css';
+import React from "react";
+import { BrowserRouter, Router, Switch, Route, Link } from "react-router-dom";
+
+// CSS
+import "./app.css";
+
+// LAYOUT
+import MainLayout from "./layout/MainLayout";
 
 function App() {
   return (
     <>
-      <h1>hello</h1>
+      <BrowserRouter>
+        <Switch>
+          <Route path="/" component={MainLayout}></Route>
+        </Switch>
+      </BrowserRouter>
     </>
   );
 }

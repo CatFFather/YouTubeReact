@@ -32,10 +32,16 @@ function SearchList(props) {
 
     return (
         <>
-            <div>SearchList</div>
-            <div>SearchList</div>
-            <div>SearchList</div>
-            <div>SearchList</div>
+            {searchList.length > 0 &&
+                searchList.map((item) => {
+                    return (
+                        <img
+                            src={item && item.snippet.thumbnails.medium.url}
+                            width={item && item.snippet.thumbnails.medium.width}
+                            height={item && item.snippet.thumbnails.medium.height}
+                        ></img>
+                    );
+                })}
         </>
     );
 }

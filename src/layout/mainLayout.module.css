@@ -1,0 +1,6 @@
+/* MainLayout CSS */
+
+.main__container {
+    position: relative;
+    min-height: 100%;
+}

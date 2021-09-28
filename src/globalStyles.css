@@ -1,0 +1,24 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+html {
+    height: 100%;
+    width: 100%;
+}
+body {
+    height: 100%;
+    width: 100%;
+    /* fontFamily: 'Noto Sans KR', */
+}
+a {
+    text-decoration: none;
+}
+
+#root {
+    height: 100%;
+    width: 100%;
+}
+ul {
+    list-style: none;
+}

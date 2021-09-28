@@ -1,6 +1,9 @@
 /* MainLayout CSS */
 
 .main__container {
-    position: relative;
-    min-height: 100%;
+  position: relative;
+  min-height: 100%;
+}
+.main__list {
+  padding: 13px;
 }

@@ -9,7 +9,7 @@ const axiosInstance = axios.create({
 });
 const key = 'AIzaSyBjY4SiEXfH0UHaLk9BkSR0jkstumVwddk';
 
-// 인기 목록 api 호출
+// 인기 목록
 const getMostPopularList = (filter) => {
     filter.key = key;
     return axiosInstance({
@@ -26,7 +26,18 @@ const getSearchList = (filter) => {
         url: `/search?${qs.stringify(filter, { arrayFormat: 'repeat' })}`,
     });
 };
+
+// 채널 정보 리스트
+const getChannelsInfo = (filter) => {
+    filter.key = key;
+    return axiosInstance({
+        method: 'get',
+        url: `/channels?${qs.stringify(filter, { arrayFormat: 'repeat' })}`,
+    });
+};
+
 export default {
-    getMostPopularList, // 인기 목록 api 호출
+    getMostPopularList, // 인기 목록
     getSearchList, // 키워드 검색 리스트
+    getChannelsInfo, // 채널 정보 리스트
 };

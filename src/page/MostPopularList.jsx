@@ -21,7 +21,7 @@ function MostPopularList(props) {
         const filter = {
             part: 'snippet',
             chart: 'mostPopular',
-            maxResults: 5,
+            maxResults: 15,
             regionCode: 'KR',
         };
         apiService.getMostPopularList(filter).then((res) => {
@@ -40,20 +40,21 @@ function MostPopularList(props) {
 
         const filter = {
             part: 'snippet',
-            maxResults: 5,
+            maxResults: 15,
             id: channelIdArr,
         };
         apiService.getChannelsInfo(filter).then((res) => {
             // indexOf를 이용하여 인기 목록의 순서로 정렬해주기
             let newChannelsInfoList = [];
-            res.data.items.forEach((itme, index) => {
+            res.data.items.forEach((item, index) => {
                 console.log('index', index);
-                console.log('itme.id', itme.id);
-                console.log('channelIdArr.indexOf(itme.id)', channelIdArr.indexOf(itme.id));
-                newChannelsInfoList.push(res.data.items[channelIdArr.indexOf(itme.id)]);
+                console.log('item.id', item.id);
+                console.log('channelIdArr.indexOf(itme.id)', channelIdArr.indexOf(item.id));
+                newChannelsInfoList[channelIdArr.indexOf(item.id)] = item;
+                // newChannelsInfoList.push(res.data.items[channelIdArr.indexOf(item.id)]);
             });
-
-            // 인기 목록 + 채널 썸네일 state에 저장 할 새로운 arr 생성
+            console.log('newChannelsInfoList', newChannelsInfoList);
+            // 인기 목록 + 채널 썸네일 state에 저장 할 새로운 arr 생성 // TODO 채널 정보 불러올 때 채널 id 동일 이슈 발생
             const newPopularList = videoInfos.map((item, index) => {
                 item.snippet.channelThumbnails = newChannelsInfoList[index].snippet.thumbnails;
                 return item;

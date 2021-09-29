@@ -6,6 +6,9 @@ import ThumbnailCard from "../components/card/VideoInfoCard";
 // SERVICE
 import apiService from "../service/apiService";
 
+// UTIL
+import { getAllIndexes } from "../util/util";
+
 // 인기 목록
 function MostPopularList(props) {
   const [popularList, setPopularList] = useState([]); // 인기 목록 + 채널 썸네일
@@ -36,7 +39,6 @@ function MostPopularList(props) {
     const channelIdArr = videoInfos.map((item) => {
       return item.snippet.channelId;
     });
-    console.log("channelIdArr", channelIdArr);
 
     const filter = {
       part: "snippet",
@@ -49,7 +51,6 @@ function MostPopularList(props) {
       let newChannelsInfoList = [];
       res.data.items.forEach((item, index) => {
         const indexOfAll = getAllIndexes(channelIdArr, item.id);
-        console.log(indexOfAll);
         indexOfAll.forEach((indexOf) => {
           newChannelsInfoList[indexOf] = item;
         });
@@ -62,16 +63,6 @@ function MostPopularList(props) {
       });
       setPopularList(newPopularList); // 인기 목록 + 채널 썸네일 state에 저장
     });
-  }
-
-  // indexOf 로는 동일 채널 id 일때 문제 발생-->  indexOfAll 함수가 필요함
-  function getAllIndexes(arr, val) {
-    var indexes = [],
-      i = -1;
-    while ((i = arr.indexOf(val, i + 1)) != -1) {
-      indexes.push(i);
-    }
-    return indexes;
   }
 
   return (

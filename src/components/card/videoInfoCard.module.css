@@ -1,0 +1,25 @@
+.cardWrap {
+  display: inline-block;
+  margin: 7px;
+}
+
+.videoInfo {
+  display: flex;
+  margin: 7px 0px;
+}
+.channelThumbnails {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.titleWrap {
+  margin: 0px 10px;
+}
+.videoTitle {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  margin-bottom: 5px;
+}

@@ -3,7 +3,7 @@ import qs from "qs";
 import { useLocation } from "react-router-dom";
 
 // COMPONENT
-import ThumbnailCard from "../components/card/VideoInfoCard";
+import PopularListInfoCard from "../components/card/PopularListInfoCard";
 
 // SERVICE
 import apiService from "../service/apiService";
@@ -15,6 +15,11 @@ import { getAllIndexes } from "../util/util";
 function SearchList(props) {
   const location = useLocation();
   const [searchList, setSearchList] = useState([]); // api를 통해 얻은 검색 목록
+
+  const wrapStyle = {
+    backgroundColor: "#f9f9f9",
+    padding: "70px 15px 15px 15px",
+  };
 
   // 1. query 변경 시 리스트 갱신
   const query = qs.parse(location.search.replace("?", ""));
@@ -69,14 +74,17 @@ function SearchList(props) {
   }
 
   return (
-    <>
+    <div style={wrapStyle}>
       {searchList.length > 0 &&
         searchList.map((videoInfo, index) => {
           return (
-            <ThumbnailCard key={index} videoInfo={videoInfo}></ThumbnailCard>
+            <PopularListInfoCard
+              key={index}
+              videoInfo={videoInfo}
+            ></PopularListInfoCard>
           );
         })}
-    </>
+    </div>
   );
 }
 

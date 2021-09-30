@@ -1,0 +1,28 @@
+.detailWrapColor {
+}
+
+.detailWrap {
+  max-width: 2000px;
+  margin: auto;
+  display: flex;
+  /* background-color: #f9f9f9; */
+  height: 100%;
+  padding: 70px 15px 15px 15px;
+}
+/* 비디오 정보 */
+.videoInfo {
+  width: 70%;
+  height: 100%;
+}
+.video {
+  height: 45%;
+}
+
+.playList {
+  width: 30%;
+}
+
+/* 설명 부분 */
+.descriptionWrap {
+  display: flex;
+}

@@ -1,6 +1,11 @@
 .cardWrap {
   display: inline-block;
   margin: 7px;
+  cursor: pointer;
+}
+.cardWrap:hover {
+  opacity: 0.8;
+  transition: all 300ms ease;
 }
 
 .videoInfo {
@@ -22,4 +27,16 @@
   -webkit-line-clamp: 2;
   overflow: hidden;
   margin-bottom: 5px;
+  color: #030303;
+}
+.channelTitle {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  overflow: hidden;
+  color: #606060;
+}
+.videoTitle:hover,
+.channelTitle:hover {
+  color: #030303;
 }

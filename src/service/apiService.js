@@ -1,43 +1,53 @@
-import axios from 'axios';
-import qs from 'qs';
+import axios from "axios";
+import qs from "qs";
 
 // axios 기본 값 설정
 const axiosInstance = axios.create({
-    baseURL: 'https://www.googleapis.com/youtube/v3',
-    headers: { 'Content-type': 'application/json' },
-    // timeout: 1000,
+  baseURL: "https://www.googleapis.com/youtube/v3",
+  headers: { "Content-type": "application/json" },
+  // timeout: 1000,
 });
-const key = 'AIzaSyBjY4SiEXfH0UHaLk9BkSR0jkstumVwddk';
+const key = "AIzaSyBjY4SiEXfH0UHaLk9BkSR0jkstumVwddk";
 
 // 인기 목록
 const getMostPopularList = (filter) => {
-    filter.key = key;
-    return axiosInstance({
-        method: 'get',
-        url: `/videos?${qs.stringify(filter, { arrayFormat: 'repeat' })}`,
-    });
+  filter.key = key;
+  return axiosInstance({
+    method: "get",
+    url: `/videos?${qs.stringify(filter, { arrayFormat: "repeat" })}`,
+  });
 };
 
 // 키워드 검색 리스트
 const getSearchList = (filter) => {
-    filter.key = key;
-    return axiosInstance({
-        method: 'get',
-        url: `/search?${qs.stringify(filter, { arrayFormat: 'repeat' })}`,
-    });
+  filter.key = key;
+  return axiosInstance({
+    method: "get",
+    url: `/search?${qs.stringify(filter, { arrayFormat: "repeat" })}`,
+  });
 };
 
 // 채널 정보 리스트
 const getChannelsInfo = (filter) => {
-    filter.key = key;
-    return axiosInstance({
-        method: 'get',
-        url: `/channels?${qs.stringify(filter, { arrayFormat: 'repeat' })}`,
-    });
+  filter.key = key;
+  return axiosInstance({
+    method: "get",
+    url: `/channels?${qs.stringify(filter, { arrayFormat: "repeat" })}`,
+  });
+};
+
+// 비디오 정보 (단일 조회)
+const getVideoInfo = (filter) => {
+  filter.key = key;
+  return axiosInstance({
+    method: "get",
+    url: `/videos?${qs.stringify(filter, { arrayFormat: "repeat" })}`,
+  });
 };
 
 export default {
-    getMostPopularList, // 인기 목록
-    getSearchList, // 키워드 검색 리스트
-    getChannelsInfo, // 채널 정보 리스트
+  getMostPopularList, // 인기 목록
+  getSearchList, // 키워드 검색 리스트
+  getChannelsInfo, // 채널 정보 리스트
+  getVideoInfo, // 비디오 정보 (단일 조회)
 };

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 // COMPONENT
-import ThumbnailCard from "../components/card/VideoInfoCard";
+import PopularListInfoCard from "../components/card/PopularListInfoCard";
 
 // SERVICE
 import apiService from "../service/apiService";
@@ -12,6 +12,11 @@ import { getAllIndexes } from "../util/util";
 // 인기 목록
 function MostPopularList(props) {
   const [popularList, setPopularList] = useState([]); // 인기 목록 + 채널 썸네일
+
+  const wrapStyle = {
+    backgroundColor: "#f9f9f9",
+    padding: "70px 15px 15px 15px",
+  };
 
   // 1. 첫 랜더링 시 목록 불러오기
   useEffect(() => {
@@ -67,15 +72,17 @@ function MostPopularList(props) {
 
   return (
     <>
-      {popularList.length > 0 &&
-        popularList.map((videoInfo, index) => {
-          return (
-            <ThumbnailCard
-              key={videoInfo.id}
-              videoInfo={videoInfo}
-            ></ThumbnailCard>
-          );
-        })}
+      <div style={wrapStyle}>
+        {popularList.length > 0 &&
+          popularList.map((videoInfo, index) => {
+            return (
+              <PopularListInfoCard
+                key={videoInfo.id}
+                videoInfo={videoInfo}
+              ></PopularListInfoCard>
+            );
+          })}
+      </div>
     </>
   );
 }

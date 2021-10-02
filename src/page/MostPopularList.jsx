@@ -13,11 +13,6 @@ import { getAllIndexes } from "../util/util";
 function MostPopularList(props) {
   const [popularList, setPopularList] = useState([]); // 인기 목록 + 채널 썸네일
 
-  const wrapStyle = {
-    backgroundColor: "#f9f9f9",
-    padding: "70px 15px 15px 15px",
-  };
-
   // 1. 첫 랜더링 시 목록 불러오기
   useEffect(() => {
     getMostPopularList();
@@ -72,7 +67,7 @@ function MostPopularList(props) {
 
   return (
     <>
-      <div style={wrapStyle}>
+      <div>
         {popularList.length > 0 &&
           popularList.map((videoInfo, index) => {
             return (

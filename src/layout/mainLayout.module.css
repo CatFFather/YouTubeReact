@@ -2,7 +2,10 @@
 .main__container {
   position: relative;
   height: 100%;
+  overflow: auto;
+  background-color: #f9f9f9;
 }
 .main__section {
   height: calc(100% - 87px);
+  padding: 70px 15px 15px 15px;
 }

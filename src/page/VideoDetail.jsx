@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 
 // CSS
 import style from "./videoDetail.module.css";
@@ -13,6 +13,7 @@ import { getAllIndexes } from "../util/util";
 // 비디오 상세보기 페이지
 function VideoDetail(props) {
   const { id } = useParams();
+  const history = useHistory();
   const [videoInfo, setVideoInfo] = useState(null);
   console.log(videoInfo);
 
@@ -20,6 +21,7 @@ function VideoDetail(props) {
     getVideoInfo();
   }, []);
 
+  // 1. 비디오 상세 정보 받아오기
   function getVideoInfo() {
     const filter = {
       part: "snippet",
@@ -33,7 +35,7 @@ function VideoDetail(props) {
     });
   }
 
-  // 3. 채널 정보 불러오기
+  // 2. 채널 정보 불러오기
   function getChannelInfo(videoInfos) {
     // 채널 id를 arr 형태로 보내줘야함
     const channelIdArr = videoInfos.map((item) => {
@@ -65,6 +67,12 @@ function VideoDetail(props) {
     });
   }
 
+  // 3. 태그클릭 시 태그 명으로 검색
+  function tagSearch(tag) {
+    if (!tag) return;
+    history.push(`/searchList?q=${tag}`);
+  }
+
   return (
     videoInfo && (
       <div className={style.detailWrap}>
@@ -79,6 +87,20 @@ function VideoDetail(props) {
               frameborder="0"
             ></iframe>
           </div>
+          <div className={style.tags}>
+            {videoInfo.snippet.tags &&
+              videoInfo.snippet.tags.map((tag) => {
+                return (
+                  <span
+                    onClick={() => {
+                      tagSearch(tag);
+                    }}
+                  >
+                    #{tag}{" "}
+                  </span>
+                );
+              })}
+          </div>
           <div className={style.videoTitle}>{videoInfo.snippet.title}</div>
           <div className={style.date}>{videoInfo.snippet.publishedAt}</div>
           <div className={style.descriptionWrap}>
@@ -91,14 +113,11 @@ function VideoDetail(props) {
               ></img>
             </div>
             <div className={style.descriptionRight}>
+              <div className={style.channelTitle}>
+                {videoInfo.snippet.channelTitle}
+              </div>
               <div className={style.description}>
                 {videoInfo.snippet.description}
-              </div>
-              <div className={style.tags}>
-                {videoInfo.snippet.tags &&
-                  videoInfo.snippet.tags.map((tag) => {
-                    return <span>{tag}</span>;
-                  })}
               </div>
             </div>
           </div>

@@ -4,6 +4,7 @@
   display: flex;
   height: 100%;
 }
+
 /* 비디오 정보 */
 .videoInfo {
   width: 70%;
@@ -11,13 +12,36 @@
 }
 .video {
   height: 45%;
+  margin-bottom: 10px;
 }
-
-.playList {
-  width: 30%;
+.tags {
+  cursor: pointer;
+  margin-bottom: 5px;
+  color: #065fd4;
+}
+.videoTitle {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+.date {
+  color: #606060;
+  margin-bottom: 10px;
 }
 
 /* 설명 부분 */
 .descriptionWrap {
   display: flex;
+  border-top: 1px solid #e5e5e5;
+  border-bottom: 1px solid #e5e5e5;
+  padding: 20px 0px;
+}
+.channelThumbnails {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 13px;
+}
+
+.playList {
+  width: 30%;
 }

@@ -95,9 +95,10 @@ function VideoDetail(props) {
                 {videoInfo.snippet.description}
               </div>
               <div className={style.tags}>
-                {videoInfo.snippet.tags.map((tag) => {
-                  return <span>{tag}</span>;
-                })}
+                {videoInfo.snippet.tags &&
+                  videoInfo.snippet.tags.map((tag) => {
+                    return <span>{tag}</span>;
+                  })}
               </div>
             </div>
           </div>

@@ -4,6 +4,7 @@ import { useLocation } from "react-router-dom";
 
 // COMPONENT
 import PopularListInfoCard from "../components/card/PopularListInfoCard";
+import ChannelInfoCard from "../components/card/ChannelInfoCard";
 
 // SERVICE
 import apiService from "../service/apiService";
@@ -15,6 +16,10 @@ import { getAllIndexes } from "../util/util";
 function SearchList(props) {
   const location = useLocation();
   const [searchList, setSearchList] = useState([]); // api를 통해 얻은 검색 목록
+  const style = {
+    maxWidth: "1300px",
+    margin: "auto",
+  };
 
   // 1. query 변경 시 리스트 갱신
   const query = qs.parse(location.search.replace("?", ""));
@@ -69,14 +74,20 @@ function SearchList(props) {
   }
 
   return (
-    <div>
+    <div style={style}>
       {searchList.length > 0 &&
         searchList.map((videoInfo, index) => {
           return (
-            <PopularListInfoCard
-              key={index}
-              videoInfo={videoInfo}
-            ></PopularListInfoCard>
+            <>
+              {videoInfo.id.kind == "youtube#channel" ? (
+                <ChannelInfoCard key={index} channelInfo={videoInfo} />
+              ) : (
+                <PopularListInfoCard
+                  key={index}
+                  videoInfo={videoInfo}
+                ></PopularListInfoCard>
+              )}
+            </>
           );
         })}
     </div>

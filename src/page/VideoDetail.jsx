@@ -8,13 +8,14 @@ import style from "./videoDetail.module.css";
 import apiService from "../service/apiService";
 
 // UTIL
-import { getAllIndexes } from "../util/util";
+import { getAllIndexes, formatDate } from "../util/util";
 
 // 비디오 상세보기 페이지
 function VideoDetail(props) {
   const { id } = useParams();
   const history = useHistory();
   const [videoInfo, setVideoInfo] = useState(null);
+  const [moreAndLessBtn, setMoreAndLessBtn] = useState("더보기");
   console.log(videoInfo);
 
   useEffect(() => {
@@ -29,9 +30,9 @@ function VideoDetail(props) {
     };
     apiService.getVideoInfo(filter).then((res) => {
       console.log(res);
-      let videoInfo = []; // 인기 목록
-      videoInfo = res.data.items; // api 호출하여 받은 인기목록 videoInfos 변수에 저장
-      getChannelInfo(videoInfo); // 인기목록의 채널 id를 이용하여 채널 정보 불러오기
+      let videoInfo = []; // 상세 정보
+      videoInfo = res.data.items; // api 호출하여 받은 상세 정보 videoInfos 변수에 저장
+      getChannelInfo(videoInfo); // 상세 정보의 채널 id를 이용하여 채널 정보 불러오기
     });
   }
 
@@ -73,6 +74,15 @@ function VideoDetail(props) {
     history.push(`/searchList?q=${tag}`);
   }
 
+  // 4.
+  function getMoreAndLessBtn() {
+    if (moreAndLessBtn == "더보기") {
+      setMoreAndLessBtn("간략히");
+    } else {
+      setMoreAndLessBtn("더보기");
+    }
+  }
+
   return (
     videoInfo && (
       <div className={style.detailWrap}>
@@ -87,11 +97,12 @@ function VideoDetail(props) {
               frameborder="0"
             ></iframe>
           </div>
-          <div className={style.tags}>
+          <div className={style.tagsWrap}>
             {videoInfo.snippet.tags &&
               videoInfo.snippet.tags.map((tag) => {
                 return (
                   <span
+                    className={style.tags}
                     onClick={() => {
                       tagSearch(tag);
                     }}
@@ -102,7 +113,9 @@ function VideoDetail(props) {
               })}
           </div>
           <div className={style.videoTitle}>{videoInfo.snippet.title}</div>
-          <div className={style.date}>{videoInfo.snippet.publishedAt}</div>
+          <div className={style.date}>
+            {formatDate(videoInfo.snippet.publishedAt)}
+          </div>
           <div className={style.descriptionWrap}>
             <div className={style.descriptionLeft}>
               <img
@@ -116,8 +129,24 @@ function VideoDetail(props) {
               <div className={style.channelTitle}>
                 {videoInfo.snippet.channelTitle}
               </div>
-              <div className={style.description}>
+              <div
+                className={
+                  moreAndLessBtn == "더보기"
+                    ? style.descriptionLess
+                    : style.descriptionMore
+                }
+              >
                 {videoInfo.snippet.description}
+              </div>
+              <div>
+                <span
+                  className={style.moreAndLessBtn}
+                  onClick={() => {
+                    getMoreAndLessBtn();
+                  }}
+                >
+                  {moreAndLessBtn}
+                </span>
               </div>
             </div>
           </div>

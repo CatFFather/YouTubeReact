@@ -14,9 +14,11 @@
   height: 45%;
   margin-bottom: 10px;
 }
+.tagsWrap {
+  margin-bottom: 5px;
+}
 .tags {
   cursor: pointer;
-  margin-bottom: 5px;
   color: #065fd4;
 }
 .videoTitle {
@@ -40,6 +42,25 @@
   height: 50px;
   border-radius: 50%;
   margin-right: 13px;
+}
+.descriptionRight {
+  font-size: 14px;
+}
+.descriptionLess {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+.descriptionMore {
+  margin-top: 10px;
+}
+.moreAndLessBtn {
+  cursor: pointer;
+  font-size: 13px;
+  color: #606060;
 }
 
 .playList {

@@ -3,7 +3,7 @@ import qs from "qs";
 import { useLocation } from "react-router-dom";
 
 // COMPONENT
-import PopularListInfoCard from "../components/card/PopularListInfoCard";
+import SearchListCard from "../components/card/SearchListCard";
 import ChannelInfoCard from "../components/card/ChannelInfoCard";
 
 // SERVICE
@@ -82,10 +82,10 @@ function SearchList(props) {
               {videoInfo.id.kind == "youtube#channel" ? (
                 <ChannelInfoCard key={index} channelInfo={videoInfo} />
               ) : (
-                <PopularListInfoCard
+                <SearchListCard
                   key={index}
                   videoInfo={videoInfo}
-                ></PopularListInfoCard>
+                ></SearchListCard>
               )}
             </>
           );

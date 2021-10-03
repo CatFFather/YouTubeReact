@@ -1,0 +1,32 @@
+.cardWrap {
+  display: flex;
+  padding: 8px;
+  cursor: pointer;
+}
+.cardWrap:hover {
+  opacity: 0.8;
+  transition: all 300ms ease;
+}
+.videoInfoWrap {
+  padding: 0px 10px;
+}
+.title {
+  font-size: 18px;
+}
+.channelTitle {
+  padding: 10px 0px;
+  font-size: 12px;
+  color: #606060;
+  display: flex;
+  align-items: center;
+}
+.channelThumbnails {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  margin-right: 5px;
+}
+.description {
+  font-size: 12px;
+  color: #606060;
+}

@@ -24,6 +24,9 @@ function ChannelInfoCard(props) {
           {channelInfo.snippet.description}
         </div>
       </div>
+      <div className={style.subscribeBtnWrap}>
+        <button className={style.subscribeBtn}>구독</button>
+      </div>
     </div>
   );
 }

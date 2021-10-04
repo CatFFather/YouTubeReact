@@ -1,0 +1,34 @@
+.cardWrap {
+  width: 100%;
+  display: flex;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+.cardWrap:hover {
+  opacity: 0.8;
+  transition: all 300ms ease;
+}
+.thumbnailImg {
+  width: 170px;
+  height: 95px;
+}
+.videoInfo {
+  margin: 0px 7px;
+}
+.videoTitle {
+  font-size: 14px;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  margin-bottom: 5px;
+  color: #030303;
+}
+.channelTitle {
+  font-size: 12px;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  overflow: hidden;
+  color: #606060;
+}

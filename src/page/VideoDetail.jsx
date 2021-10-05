@@ -11,7 +11,7 @@ import apiService from "../service/apiService";
 import DetailPagePopularCard from "../components/card/DetailPagePopularCard";
 
 // UTIL
-import { getAllIndexes, formatDate } from "../util/util";
+import { getAllIndexes, formatDate, numberWithCommas } from "../util/util";
 
 // 비디오 상세보기 페이지
 function VideoDetail(props) {
@@ -24,32 +24,33 @@ function VideoDetail(props) {
 
   // 1. 첫 랜더링 시
   useEffect(() => {
-    getVideoInfo();
+    console.log("첫 랜더링");
     getMostPopularList();
   }, []);
 
   // 2. pathname이 변경 될 때 getVideoInfo 함수 재호출
   useEffect(() => {
+    console.log("location.pathname 변화");
     getVideoInfo();
   }, [location.pathname]);
 
   // 3. 비디오 상세 정보 받아오기
   function getVideoInfo() {
     const filter = {
-      part: "snippet",
+      part: ["snippet", "statistics"],
       id: id,
     };
     apiService.getVideoInfo(filter).then((res) => {
       let videoInfo = []; // 상세 정보
       videoInfo = res.data.items; // api 호출하여 받은 상세 정보 videoInfos 변수에 저장
-      getChannelInfo(videoInfo, "상세보기"); // 상세 정보의 채널 id를 이용하여 채널 정보 불러오기
+      getChannelInfo(videoInfo); // 상세 정보의 채널 id를 이용하여 채널 정보 불러오기
     });
   }
 
   // 4. 인기 목록 불러오기 (우측 리스트)
   function getMostPopularList() {
     const filter = {
-      part: "snippet",
+      part: ["snippet", "statistics"],
       chart: "mostPopular",
       maxResults: 30,
       regionCode: "KR",
@@ -57,12 +58,12 @@ function VideoDetail(props) {
     apiService.getMostPopularList(filter).then((res) => {
       let videoInfos = []; // 인기 목록
       videoInfos = res.data.items; // api 호출하여 받은 인기목록 videoInfos 변수에 저장
-      getChannelInfo(videoInfos, "인기목록"); // 인기목록의 채널 id를 이용하여 채널 정보 불러오기
+      setPopularList(videoInfos); // 인기 목록 + 채널 썸네일 state에 저장
     });
   }
 
   // 5. 채널 정보 불러오기
-  function getChannelInfo(videoInfos, type) {
+  function getChannelInfo(videoInfos) {
     // 채널 id를 arr 형태로 보내줘야함
     const channelIdArr = videoInfos.map((item) => {
       return item.snippet.channelId;
@@ -87,12 +88,7 @@ function VideoDetail(props) {
           newChannelsInfoList[index].snippet.thumbnails;
         return item;
       });
-      // type에 따라 분기처리
-      if (type == "상세보기") {
-        setVideoInfo(newVideoInfo[0]); // 비디오 정보 + 채널 썸네일 state에 저장
-      } else if (type == "인기목록") {
-        setPopularList(newVideoInfo); // 인기 목록 + 채널 썸네일 state에 저장
-      }
+      setVideoInfo(newVideoInfo[0]); // 비디오 정보 + 채널 썸네일 state에 저장
     });
   }
 
@@ -142,6 +138,8 @@ function VideoDetail(props) {
           </div>
           <div className={style.videoTitle}>{videoInfo.snippet.title}</div>
           <div className={style.date}>
+            조회수 {numberWithCommas(videoInfo.statistics.viewCount)}회
+            <div className={style.dot}></div>
             {formatDate(videoInfo.snippet.publishedAt)}
           </div>
           <div className={style.descriptionWrap}>

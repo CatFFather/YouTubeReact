@@ -4,6 +4,9 @@ import { useHistory } from "react-router-dom";
 // CSS
 import style from "./detailPagePopularCard.module.css";
 
+// UTIL
+import { numberWithCommas } from "../../util/util";
+
 // 상세보기 오른쪽 카드
 function DetailPagePopularCard(props) {
   const { videoInfo } = props;
@@ -35,6 +38,9 @@ function DetailPagePopularCard(props) {
           title={videoInfo.snippet.channelTitle}
         >
           {videoInfo.snippet.channelTitle}
+        </div>
+        <div className={style.viewCount}>
+          조회수 {numberWithCommas(videoInfo.statistics.viewCount)}회
         </div>
       </div>
     </div>

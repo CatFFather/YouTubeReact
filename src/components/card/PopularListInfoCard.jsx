@@ -4,6 +4,9 @@ import { useHistory } from "react-router-dom";
 // CSS
 import style from "./popularListInfoCard.module.css";
 
+// UTIL
+import { numberWithCommas } from "../../util/util";
+
 /**
  *
  * @param {Object} videoInfo // 비디오 정보
@@ -56,6 +59,9 @@ function VideoInfoCard(props) {
             title={videoInfo.snippet.channelTitle}
           >
             {videoInfo.snippet.channelTitle}
+          </div>
+          <div className={style.viewCount}>
+            조회수 {numberWithCommas(videoInfo.statistics.viewCount)}회
           </div>
         </div>
       </div>

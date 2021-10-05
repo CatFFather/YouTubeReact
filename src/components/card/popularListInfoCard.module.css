@@ -35,8 +35,13 @@
   -webkit-line-clamp: 1;
   overflow: hidden;
   color: #606060;
+  font-size: 14px;
 }
 .videoTitle:hover,
 .channelTitle:hover {
   color: #030303;
+}
+.viewCount {
+  color: #606060;
+  font-size: 14px;
 }

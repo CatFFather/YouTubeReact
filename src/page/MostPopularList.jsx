@@ -21,7 +21,7 @@ function MostPopularList(props) {
   // 2. 인기 목록 불러오기
   function getMostPopularList() {
     const filter = {
-      part: "snippet",
+      part: ["snippet", "statistics"],
       chart: "mostPopular",
       maxResults: 50,
       regionCode: "KR",

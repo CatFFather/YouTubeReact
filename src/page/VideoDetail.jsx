@@ -9,6 +9,7 @@ import apiService from "../service/apiService";
 
 // COMPONENT
 import DetailPagePopularCard from "../components/card/DetailPagePopularCard";
+import Coment from "../components/card/Coment";
 
 // UTIL
 import { getAllIndexes, formatDate, numberWithCommas } from "../util/util";
@@ -18,20 +19,20 @@ function VideoDetail(props) {
   const { id } = useParams();
   const history = useHistory();
   const location = useLocation();
-  const [videoInfo, setVideoInfo] = useState(null);
+  const [videoInfo, setVideoInfo] = useState(null); // 비디오 상세 정보
   const [popularList, setPopularList] = useState([]); // 인기 목록 + 채널 썸네일
-  const [moreAndLessBtn, setMoreAndLessBtn] = useState("더보기");
+  const [moreAndLessBtn, setMoreAndLessBtn] = useState("더보기"); // 더보기 버튼 변경
+  const [commentList, setCommentList] = useState([]); // 댓글 리스트
 
   // 1. 첫 랜더링 시
   useEffect(() => {
-    console.log("첫 랜더링");
     getMostPopularList();
   }, []);
 
   // 2. pathname이 변경 될 때 getVideoInfo 함수 재호출
   useEffect(() => {
-    console.log("location.pathname 변화");
     getVideoInfo();
+    getVideoComment();
   }, [location.pathname]);
 
   // 3. 비디오 상세 정보 받아오기
@@ -41,7 +42,6 @@ function VideoDetail(props) {
       id: id,
     };
     apiService.getVideoInfo(filter).then((res) => {
-      console.log(filter);
       let videoInfo = []; // 상세 정보
       videoInfo = res.data.items; // api 호출하여 받은 상세 정보 videoInfos 변수에 저장
       getChannelInfo(videoInfo); // 상세 정보의 채널 id를 이용하여 채널 정보 불러오기
@@ -64,9 +64,9 @@ function VideoDetail(props) {
   }
 
   // 5. 채널 정보 불러오기
-  function getChannelInfo(videoInfos) {
+  function getChannelInfo(infos) {
     // 채널 id를 arr 형태로 보내줘야함
-    const channelIdArr = videoInfos.map((item) => {
+    const channelIdArr = infos.map((item) => {
       return item.snippet.channelId;
     });
     const filter = {
@@ -84,12 +84,26 @@ function VideoDetail(props) {
         });
       });
       // 비디오 정보 + 채널 썸네일 state에 저장 할 새로운 arr 생성
-      const newVideoInfo = videoInfos.map((item, index) => {
+      const newVideoInfo = infos.map((item, index) => {
         item.snippet.channelThumbnails =
           newChannelsInfoList[index].snippet.thumbnails;
         return item;
       });
       setVideoInfo(newVideoInfo[0]); // 비디오 정보 + 채널 썸네일 state에 저장
+    });
+  }
+
+  // 6. 비디오 댓글 리스트 불러오기
+  function getVideoComment() {
+    const filter = {
+      part: ["snippet", "replies"],
+      videoId: id,
+      maxResults: 30,
+    };
+    apiService.getVideoComment(filter).then((res) => {
+      let commentInfo = []; // 상세 정보
+      commentInfo = res.data.items; // api 호출하여 받은 상세 정보 videoInfos 변수에 저장
+      setCommentList(commentInfo);
     });
   }
 
@@ -147,6 +161,7 @@ function VideoDetail(props) {
             )}
             {formatDate(videoInfo.snippet.publishedAt)}
           </div>
+          {/* 동영상 설명란 */}
           <div className={style.descriptionWrap}>
             <div className={style.descriptionLeft}>
               <img
@@ -184,13 +199,27 @@ function VideoDetail(props) {
               <button className={style.subscribeBtn}>구독</button>
             </div>
           </div>
+          {/* 댓글 정보 */}
+          <div className={style.commentInfo}>
+            댓글 {numberWithCommas(videoInfo.statistics.commentCount)}개
+            <button className={style.commentOrderBtn}>정렬 기준</button>
+          </div>
+          <div className={style.commentList}>
+            {commentList.length > 0 &&
+              commentList.map((comment) => {
+                return (
+                  <>
+                    <Coment comment={comment} />
+                  </>
+                );
+              })}
+          </div>
         </div>
+        {/* 오른쪽 인기 목록 */}
         <div className={style.playList}>
           {popularList.length > 0 &&
             popularList.map((videoInfo, index) => {
-              return (
-                <DetailPagePopularCard key={index} videoInfo={videoInfo} />
-              );
+              return <DetailPagePopularCard videoInfo={videoInfo} />;
             })}
         </div>
       </div>

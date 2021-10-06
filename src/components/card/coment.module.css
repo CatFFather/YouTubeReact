@@ -1,0 +1,26 @@
+.commentWrap {
+  display: flex;
+  padding: 12px 0px;
+}
+.authorProfileImgWrap {
+  margin-right: 12px;
+}
+.authorProfileImg {
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+}
+.authorName {
+  font-size: 13px;
+  color: #030303;
+}
+.textDisplay {
+  font-size: 14px;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+  overflow: hidden;
+}
+.likeCount {
+  font-size: 12px;
+}

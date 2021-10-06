@@ -45,9 +45,19 @@ const getVideoInfo = (filter) => {
   });
 };
 
+// 비디오 댓글 리스트
+const getVideoComment = (filter) => {
+  filter.key = key;
+  return axiosInstance({
+    method: "get",
+    url: `/commentThreads?${qs.stringify(filter, { arrayFormat: "repeat" })}`,
+  });
+};
+
 export default {
   getMostPopularList, // 인기 목록
   getSearchList, // 키워드 검색 리스트
   getChannelsInfo, // 채널 정보 리스트
   getVideoInfo, // 비디오 정보 (단일 조회)
+  getVideoComment, // 비디오 댓글 리스트
 };

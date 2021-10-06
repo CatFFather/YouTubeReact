@@ -41,6 +41,7 @@ function VideoDetail(props) {
       id: id,
     };
     apiService.getVideoInfo(filter).then((res) => {
+      console.log(filter);
       let videoInfo = []; // 상세 정보
       videoInfo = res.data.items; // api 호출하여 받은 상세 정보 videoInfos 변수에 저장
       getChannelInfo(videoInfo); // 상세 정보의 채널 id를 이용하여 채널 정보 불러오기
@@ -138,8 +139,12 @@ function VideoDetail(props) {
           </div>
           <div className={style.videoTitle}>{videoInfo.snippet.title}</div>
           <div className={style.date}>
-            조회수 {numberWithCommas(videoInfo.statistics.viewCount)}회
-            <div className={style.dot}></div>
+            {videoInfo.statistics.viewCount && (
+              <>
+                조회수 {numberWithCommas(videoInfo.statistics.viewCount)}회
+                <div className={style.dot}></div>
+              </>
+            )}
             {formatDate(videoInfo.snippet.publishedAt)}
           </div>
           <div className={style.descriptionWrap}>

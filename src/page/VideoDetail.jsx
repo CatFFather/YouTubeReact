@@ -1,4 +1,4 @@
-import React, { useEffect, useState, Fragment } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useParams, useHistory, useLocation } from "react-router-dom";
 
 // CSS
@@ -19,10 +19,12 @@ function VideoDetail(props) {
   const { id } = useParams();
   const history = useHistory();
   const location = useLocation();
+  const commentOrderSelectBox = useRef();
   const [videoInfo, setVideoInfo] = useState(null); // 비디오 상세 정보
   const [popularList, setPopularList] = useState([]); // 인기 목록 + 채널 썸네일
   const [moreAndLessBtn, setMoreAndLessBtn] = useState("더보기"); // 더보기 버튼 변경
   const [commentList, setCommentList] = useState([]); // 댓글 리스트
+  const [commentOrder, setCommentOrder] = useState("relevance"); // 댓글 정렬 (기본값 추천수)
 
   // 1. 첫 랜더링 시
   useEffect(() => {
@@ -99,6 +101,7 @@ function VideoDetail(props) {
       part: ["snippet", "replies"],
       videoId: id,
       maxResults: 30,
+      order: commentOrder,
     };
     apiService.getVideoComment(filter).then((res) => {
       let commentInfo = []; // 상세 정보
@@ -122,6 +125,24 @@ function VideoDetail(props) {
     }
   }
 
+  // 8. select 박스 열고 닫는 함수
+  function setCommentOrderSelectBox() {
+    console.log(commentOrderSelectBox);
+    console.log(commentOrderSelectBox.current);
+    if (commentOrderSelectBox.current.style.display == "none") {
+      commentOrderSelectBox.current.style.position = "absolute";
+      commentOrderSelectBox.current.style.display = "";
+    } else if (commentOrderSelectBox.current.style.position == "absolute") {
+      commentOrderSelectBox.current.style.display = "none";
+      commentOrderSelectBox.current.style.position = "";
+    }
+  }
+
+  // 8. 댓글 정렬 기준 변경시 api 재호출
+  useEffect(() => {
+    getVideoComment();
+  }, [commentOrder]);
+
   return (
     videoInfo && (
       <div className={style.detailWrap}>
@@ -138,16 +159,20 @@ function VideoDetail(props) {
           </div>
           <div className={style.tagsWrap}>
             {videoInfo.snippet.tags &&
-              videoInfo.snippet.tags.map((tag) => {
+              videoInfo.snippet.tags.map((tag, index) => {
                 return (
-                  <span
-                    className={style.tags}
-                    onClick={() => {
-                      tagSearch(tag);
-                    }}
-                  >
-                    #{tag}{" "}
-                  </span>
+                  <>
+                    {index < 5 && (
+                      <span
+                        className={style.tags}
+                        onClick={() => {
+                          tagSearch(tag);
+                        }}
+                      >
+                        #{tag}{" "}
+                      </span>
+                    )}
+                  </>
                 );
               })}
           </div>
@@ -171,6 +196,7 @@ function VideoDetail(props) {
                 height={videoInfo.snippet.channelThumbnails.default.height}
               ></img>
             </div>
+
             <div className={style.descriptionRight}>
               <div className={style.channelTitle}>
                 {videoInfo.snippet.channelTitle}
@@ -181,9 +207,10 @@ function VideoDetail(props) {
                     ? style.descriptionLess
                     : style.descriptionMore
                 }
-              >
-                {videoInfo.snippet.description}
-              </div>
+                dangerouslySetInnerHTML={{
+                  __html: videoInfo.snippet.localized.description,
+                }}
+              ></div>
               <div>
                 <span
                   className={style.moreAndLessBtn}
@@ -202,7 +229,39 @@ function VideoDetail(props) {
           {/* 댓글 정보 */}
           <div className={style.commentInfo}>
             댓글 {numberWithCommas(videoInfo.statistics.commentCount)}개
-            <button className={style.commentOrderBtn}>정렬 기준</button>
+            <div className={style.commentOrderWrap}>
+              <button
+                className={style.commentOrderBtn}
+                onClick={setCommentOrderSelectBox}
+              >
+                <img src="/images/orderBtn.png" />
+                정렬 기준
+              </button>
+              <div
+                ref={commentOrderSelectBox}
+                style={{ display: "none" }}
+                className={style.commentOrderSelectBox}
+              >
+                <div
+                  className={style.commentOrderOption}
+                  onClick={() => {
+                    setCommentOrder("relevance");
+                    setCommentOrderSelectBox();
+                  }}
+                >
+                  인기 댓글순
+                </div>
+                <div
+                  className={style.commentOrderOption}
+                  onClick={() => {
+                    setCommentOrder("time");
+                    setCommentOrderSelectBox();
+                  }}
+                >
+                  최근 날짜순
+                </div>
+              </div>
+            </div>
           </div>
           <div className={style.commentList}>
             {commentList.length > 0 &&

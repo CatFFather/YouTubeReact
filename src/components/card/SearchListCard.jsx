@@ -28,7 +28,12 @@ function SearchListCard(props) {
         height={videoInfo.snippet.thumbnails.medium.height}
       ></img>
       <div className={style.videoInfoWrap}>
-        <div className={style.title}>{videoInfo.snippet.title}</div>
+        <div
+          className={style.title}
+          dangerouslySetInnerHTML={{
+            __html: videoInfo.snippet.title,
+          }}
+        ></div>
         <div className={style.channelTitle}>
           <img
             className={style.channelThumbnails}

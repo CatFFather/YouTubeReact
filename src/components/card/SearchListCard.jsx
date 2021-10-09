@@ -3,6 +3,9 @@ import { useHistory } from "react-router-dom";
 // CSS
 import style from "./searchListCard.module.css";
 
+// UTIL
+import { numberWithCommas, timeForToday } from "../../util/util";
+
 // 검색 시 비디오 정보 card
 function SearchListCard(props) {
   const history = useHistory();
@@ -11,7 +14,6 @@ function SearchListCard(props) {
 
   // 클릭시 상세보기 페이지로 이동
   function videoDetail(id) {
-    console.log(id);
     history.push(`/videoDtail/${id}`);
   }
 
@@ -34,6 +36,11 @@ function SearchListCard(props) {
             __html: videoInfo.snippet.title,
           }}
         ></div>
+        <div className={style.viewCount}>
+          {/* 조회수 {numberWithCommas(videoInfo.statistics.viewCount)}회 */}
+          <div className={style.dot}></div>
+          {timeForToday(videoInfo.snippet.publishedAt)}
+        </div>
         <div className={style.channelTitle}>
           <img
             className={style.channelThumbnails}

@@ -228,7 +228,9 @@ function VideoDetail(props) {
           </div>
           {/* 댓글 정보 */}
           <div className={style.commentInfo}>
-            댓글 {numberWithCommas(videoInfo.statistics.commentCount)}개
+            {videoInfo.statistics.commentCount && (
+              <>댓글 {numberWithCommas(videoInfo.statistics.commentCount)}개</>
+            )}
             <div className={style.commentOrderWrap}>
               <button
                 className={style.commentOrderBtn}

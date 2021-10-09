@@ -45,3 +45,11 @@
   color: #606060;
   font-size: 14px;
 }
+
+.dot {
+  background-color: #606060;
+  display: inline-block;
+  border: 1.5px solid #606060;
+  border-radius: 50%;
+  margin: 4px;
+}

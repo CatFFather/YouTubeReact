@@ -5,7 +5,7 @@ import { useHistory } from "react-router-dom";
 import style from "./popularListInfoCard.module.css";
 
 // UTIL
-import { numberWithCommas } from "../../util/util";
+import { numberWithCommas, timeForToday } from "../../util/util";
 
 /**
  *
@@ -24,7 +24,6 @@ function VideoInfoCard(props) {
 
   // 클릭시 상세보기 페이지로 이동
   function videoDetail(id) {
-    console.log(id);
     history.push(`/videoDtail/${id}`);
   }
 
@@ -62,6 +61,8 @@ function VideoInfoCard(props) {
           </div>
           <div className={style.viewCount}>
             조회수 {numberWithCommas(videoInfo.statistics.viewCount)}회
+            <div className={style.dot}></div>
+            {timeForToday(videoInfo.snippet.publishedAt)}
           </div>
         </div>
       </div>

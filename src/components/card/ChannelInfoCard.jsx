@@ -17,12 +17,8 @@ function ChannelInfoCard(props) {
         ></img>
       </div>
       <div className={style.channelInfo}>
-        <div className={style.channelTitle}>
-          {channelInfo.snippet.channelTitle}
-        </div>
-        <div className={style.description}>
-          {channelInfo.snippet.description}
-        </div>
+        <p className={style.channelTitle}>{channelInfo.snippet.channelTitle}</p>
+        <p className={style.description}>{channelInfo.snippet.description}</p>
       </div>
       <div className={style.subscribeBtnWrap}>
         <button className={style.subscribeBtn}>구독</button>

@@ -80,10 +80,13 @@ function SearchList(props) {
           return (
             <>
               {videoInfo.id.kind == "youtube#channel" ? (
-                <ChannelInfoCard key={index} channelInfo={videoInfo} />
+                <ChannelInfoCard
+                  key={videoInfo.id.channelId}
+                  channelInfo={videoInfo}
+                />
               ) : (
                 <SearchListCard
-                  key={index}
+                  key={videoInfo.id.videoId}
                   videoInfo={videoInfo}
                 ></SearchListCard>
               )}

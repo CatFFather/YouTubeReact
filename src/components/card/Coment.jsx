@@ -14,15 +14,15 @@ function Coment(props) {
         />
       </div>
       <div>
-        <div className={style.authorName}>
+        <p className={style.authorName}>
           {comment.snippet.topLevelComment.snippet.authorDisplayName}
-        </div>
-        <div
+        </p>
+        <p
           className={style.textDisplay}
           dangerouslySetInnerHTML={{
             __html: comment.snippet.topLevelComment.snippet.textDisplay,
           }}
-        ></div>
+        ></p>
         {/* <div className={style.likeCount}>
           {comment.snippet.topLevelComment.snippet.likeCount}
         </div> */}

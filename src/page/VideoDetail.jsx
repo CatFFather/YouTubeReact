@@ -176,8 +176,8 @@ function VideoDetail(props) {
                 );
               })}
           </div>
-          <div className={style.videoTitle}>{videoInfo.snippet.title}</div>
-          <div className={style.date}>
+          <p className={style.videoTitle}>{videoInfo.snippet.title}</p>
+          <p className={style.date}>
             {videoInfo.statistics.viewCount && (
               <>
                 조회수 {numberWithCommas(videoInfo.statistics.viewCount)}회
@@ -185,7 +185,7 @@ function VideoDetail(props) {
               </>
             )}
             {formatDate(videoInfo.snippet.publishedAt)}
-          </div>
+          </p>
           {/* 동영상 설명란 */}
           <div className={style.descriptionWrap}>
             <div className={style.descriptionLeft}>
@@ -198,10 +198,10 @@ function VideoDetail(props) {
             </div>
 
             <div className={style.descriptionRight}>
-              <div className={style.channelTitle}>
+              <p className={style.channelTitle}>
                 {videoInfo.snippet.channelTitle}
-              </div>
-              <div
+              </p>
+              <p
                 className={
                   moreAndLessBtn == "더보기"
                     ? style.descriptionLess
@@ -210,7 +210,7 @@ function VideoDetail(props) {
                 dangerouslySetInnerHTML={{
                   __html: videoInfo.snippet.localized.description,
                 }}
-              ></div>
+              ></p>
               <div>
                 <span
                   className={style.moreAndLessBtn}

@@ -10,7 +10,6 @@ import { numberWithCommas, timeForToday } from "../../util/util";
 function SearchListCard(props) {
   const history = useHistory();
   const { videoInfo } = props;
-  console.log(videoInfo);
 
   // 클릭시 상세보기 페이지로 이동
   function videoDetail(id) {
@@ -30,17 +29,17 @@ function SearchListCard(props) {
         height={videoInfo.snippet.thumbnails.medium.height}
       ></img>
       <div className={style.videoInfoWrap}>
-        <div
+        <p
           className={style.title}
           dangerouslySetInnerHTML={{
             __html: videoInfo.snippet.title,
           }}
-        ></div>
-        <div className={style.viewCount}>
+        ></p>
+        <p className={style.viewCount}>
           {/* 조회수 {numberWithCommas(videoInfo.statistics.viewCount)}회 */}
           <div className={style.dot}></div>
           {timeForToday(videoInfo.snippet.publishedAt)}
-        </div>
+        </p>
         <div className={style.channelTitle}>
           <img
             className={style.channelThumbnails}
@@ -48,7 +47,7 @@ function SearchListCard(props) {
           ></img>
           {videoInfo.snippet.channelTitle}
         </div>
-        <div className={style.description}>{videoInfo.snippet.description}</div>
+        <p className={style.description}>{videoInfo.snippet.description}</p>
       </div>
     </div>
   );

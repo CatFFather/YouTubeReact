@@ -30,20 +30,20 @@ function DetailPagePopularCard(props) {
         src={videoInfo.snippet.thumbnails.medium.url}
       ></img>
       <div className={style.videoInfo}>
-        <div className={style.videoTitle} title={videoInfo.snippet.title}>
+        <p className={style.videoTitle} title={videoInfo.snippet.title}>
           {videoInfo.snippet.title}
-        </div>
-        <div
+        </p>
+        <p
           className={style.channelTitle}
           title={videoInfo.snippet.channelTitle}
         >
           {videoInfo.snippet.channelTitle}
-        </div>
-        <div className={style.viewCount}>
+        </p>
+        <p className={style.viewCount}>
           조회수 {numberWithCommas(videoInfo.statistics.viewCount)}회
           <div className={style.dot}></div>
           {timeForToday(videoInfo.snippet.publishedAt)}
-        </div>
+        </p>
       </div>
     </div>
   );

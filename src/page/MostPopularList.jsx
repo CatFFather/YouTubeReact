@@ -67,17 +67,15 @@ function MostPopularList(props) {
 
   return (
     <>
-      <div>
-        {popularList.length > 0 &&
-          popularList.map((videoInfo, index) => {
-            return (
-              <PopularListInfoCard
-                key={videoInfo.id}
-                videoInfo={videoInfo}
-              ></PopularListInfoCard>
-            );
-          })}
-      </div>
+      {popularList.length > 0 &&
+        popularList.map((videoInfo, index) => {
+          return (
+            <PopularListInfoCard
+              key={videoInfo.id}
+              videoInfo={videoInfo}
+            ></PopularListInfoCard>
+          );
+        })}
     </>
   );
 }

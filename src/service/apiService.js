@@ -7,7 +7,7 @@ const axiosInstance = axios.create({
   headers: { "Content-type": "application/json" },
   // timeout: 1000,
 });
-const key = "AIzaSyBjY4SiEXfH0UHaLk9BkSR0jkstumVwddk";
+const key = process.env.REACT_APP_YOUTUBE_API_KEY;
 
 // 인기 목록
 const getMostPopularList = (filter) => {

@@ -8,4 +8,7 @@
 .main__section {
   height: calc(100% - 87px);
   padding: 70px 15px 15px 15px;
+  display: flex;
+  flex-wrap: wrap;
+  /* justify-content: center; 모바일 때만 활성화 */
 }

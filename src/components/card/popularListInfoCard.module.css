@@ -2,6 +2,10 @@
   display: inline-block;
   margin: 7px;
   cursor: pointer;
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 280px;
+  max-width: 320px;
 }
 .cardWrap:hover {
   opacity: 0.8;

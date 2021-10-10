@@ -17,10 +17,6 @@ import { numberWithCommas, timeForToday } from "../../util/util";
 function VideoInfoCard(props) {
   const { videoInfo } = props;
   const history = useHistory();
-  const cardSize = {
-    width: videoInfo.snippet.thumbnails.medium.width,
-    // height: videoInfo && videoInfo.snippet.thumbnails.medium.height,
-  };
 
   // 클릭시 상세보기 페이지로 이동
   function videoDetail(id) {
@@ -30,17 +26,12 @@ function VideoInfoCard(props) {
   return (
     <div
       className={style.cardWrap}
-      style={cardSize}
       onClick={() => {
         videoDetail(videoInfo.id);
       }}
     >
       <div className={style.thumbnailImg}>
-        <img
-          src={videoInfo.snippet.thumbnails.medium.url}
-          width={videoInfo.snippet.thumbnails.medium.width}
-          height={videoInfo.snippet.thumbnails.medium.height}
-        ></img>
+        <img src={videoInfo.snippet.thumbnails.medium.url} width={"100%"}></img>
       </div>
       <div className={style.videoInfo}>
         <img

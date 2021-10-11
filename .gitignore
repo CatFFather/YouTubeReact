@@ -24,3 +24,5 @@ yarn-error.log*
 
 # API KEYs (깃허브에는 그냥 올림)
 # .env 
+# Local Netlify folder
+.netlify

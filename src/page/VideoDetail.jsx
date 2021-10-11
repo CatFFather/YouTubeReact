@@ -153,8 +153,9 @@ function VideoDetail(props) {
               type="text/html"
               width="100%"
               height="100%"
-              src={`http://www.youtube.com/embed/${videoInfo.id}?enablejsapi=1&origin=http://example.com`}
-              frameborder="0"
+              src={`http://www.youtube.com/embed/${videoInfo.id}`}
+              frameBorder="0"
+              allowFullScreen
             ></iframe>
           </div>
           <div className={style.tagsWrap}>

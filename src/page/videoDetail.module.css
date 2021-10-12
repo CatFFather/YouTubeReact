@@ -7,11 +7,11 @@
 
 /* 비디오 정보 */
 .videoInfo {
-  width: 65%;
+  flex: 1 1 65%;
   padding: 5px;
 }
 .video {
-  height: 45%;
+  height: 500px;
   margin-bottom: 10px;
 }
 .tagsWrap {
@@ -124,6 +124,18 @@
 
 /* 오른쪽 리스트 */
 .playList {
-  width: 35%;
+  flex: 1 1 35%;
   padding: 5px;
+}
+
+@media screen and (max-width: 780px) {
+  .detailWrap {
+    flex-direction: column;
+  }
+  .video {
+    height: 400px;
+  }
+  .playList {
+    margin-top: 10px;
+  }
 }

@@ -34,3 +34,20 @@
   color: #606060;
   font-size: 14px;
 }
+
+@media screen and (max-width: 780px) {
+  .thumbnails {
+    width: 160px;
+    height: 90px;
+  }
+  .title {
+    font-size: 14px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+  }
+  .description {
+    display: none;
+  }
+}

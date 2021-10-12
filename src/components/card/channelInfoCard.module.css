@@ -43,3 +43,23 @@
   border: none;
   color: #ffffff;
 }
+@media screen and (max-width: 780px) {
+  .channelInfo {
+    margin: 0px 15px;
+  }
+  .thumbnails {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+  }
+  .description {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+  }
+  .subscribeBtn {
+    width: 42px;
+    height: 30px;
+  }
+}

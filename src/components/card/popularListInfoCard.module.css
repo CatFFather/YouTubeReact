@@ -57,3 +57,10 @@
   border-radius: 50%;
   margin: 4px;
 }
+
+@media screen and (max-width: 780px) {
+  .cardWrap {
+    max-width: none;
+    width: 100%;
+  }
+}

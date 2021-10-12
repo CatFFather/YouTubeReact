@@ -1,0 +1,11 @@
+.searchList {
+  max-width: 1300px;
+  margin: auto;
+}
+
+@media screen and (max-width: 780px) {
+  .searchList {
+    display: flex;
+    flex-direction: column;
+  }
+}

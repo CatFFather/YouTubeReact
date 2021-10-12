@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import qs from "qs";
 import { useLocation } from "react-router-dom";
+// CSS
+import style from "./searchList.module.css";
 
 // COMPONENT
 import SearchListCard from "../components/card/SearchListCard";
@@ -16,10 +18,6 @@ import { getAllIndexes } from "../util/util";
 function SearchList(props) {
   const location = useLocation();
   const [searchList, setSearchList] = useState([]); // api를 통해 얻은 검색 목록
-  const style = {
-    maxWidth: "1300px",
-    margin: "auto",
-  };
 
   // 1. query 변경 시 리스트 갱신
   const query = qs.parse(location.search.replace("?", ""));
@@ -74,7 +72,7 @@ function SearchList(props) {
   }
 
   return (
-    <div style={style}>
+    <div className={style.searchList}>
       {searchList.length > 0 &&
         searchList.map((videoInfo, index) => {
           return (

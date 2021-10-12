@@ -24,6 +24,7 @@ function SearchListCard(props) {
       }}
     >
       <img
+        className={style.thumbnails}
         src={videoInfo.snippet.thumbnails.medium.url}
         width={videoInfo.snippet.thumbnails.medium.width}
         height={videoInfo.snippet.thumbnails.medium.height}

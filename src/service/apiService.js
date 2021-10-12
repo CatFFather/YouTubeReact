@@ -1,17 +1,17 @@
 import axios from "axios";
 import qs from "qs";
 
+const key = process.env.REACT_APP_YOUTUBE_API_KEY;
 // axios 기본 값 설정
 const axiosInstance = axios.create({
   baseURL: "https://www.googleapis.com/youtube/v3",
   headers: { "Content-type": "application/json" },
+  params: { key: key },
   // timeout: 1000,
 });
-const key = process.env.REACT_APP_YOUTUBE_API_KEY;
 
 // 인기 목록
 const getMostPopularList = (filter) => {
-  filter.key = key;
   return axiosInstance({
     method: "get",
     url: `/videos?${qs.stringify(filter, { arrayFormat: "repeat" })}`,
@@ -20,7 +20,6 @@ const getMostPopularList = (filter) => {
 
 // 키워드 검색 리스트
 const getSearchList = (filter) => {
-  filter.key = key;
   return axiosInstance({
     method: "get",
     url: `/search?${qs.stringify(filter, { arrayFormat: "repeat" })}`,
@@ -29,7 +28,6 @@ const getSearchList = (filter) => {
 
 // 채널 정보 리스트
 const getChannelsInfo = (filter) => {
-  filter.key = key;
   return axiosInstance({
     method: "get",
     url: `/channels?${qs.stringify(filter, { arrayFormat: "repeat" })}`,
@@ -38,7 +36,6 @@ const getChannelsInfo = (filter) => {
 
 // 비디오 정보 (단일 조회)
 const getVideoInfo = (filter) => {
-  filter.key = key;
   return axiosInstance({
     method: "get",
     url: `/videos?${qs.stringify(filter, { arrayFormat: "repeat" })}`,
@@ -47,7 +44,6 @@ const getVideoInfo = (filter) => {
 
 // 비디오 댓글 리스트
 const getVideoComment = (filter) => {
-  filter.key = key;
   return axiosInstance({
     method: "get",
     url: `/commentThreads?${qs.stringify(filter, { arrayFormat: "repeat" })}`,

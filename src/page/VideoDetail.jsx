@@ -165,6 +165,7 @@ function VideoDetail(props) {
                   <>
                     {index < 5 && (
                       <span
+                        key={index}
                         className={style.tags}
                         onClick={() => {
                           tagSearch(tag);
@@ -271,7 +272,7 @@ function VideoDetail(props) {
               commentList.map((comment) => {
                 return (
                   <>
-                    <Coment comment={comment} />
+                    <Coment key={comment.id} comment={comment} />
                   </>
                 );
               })}
@@ -281,7 +282,12 @@ function VideoDetail(props) {
         <div className={style.playList}>
           {popularList.length > 0 &&
             popularList.map((videoInfo, index) => {
-              return <DetailPagePopularCard videoInfo={videoInfo} />;
+              return (
+                <DetailPagePopularCard
+                  key={videoInfo.id}
+                  videoInfo={videoInfo}
+                />
+              );
             })}
         </div>
       </div>

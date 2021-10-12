@@ -147,15 +147,11 @@ function VideoDetail(props) {
     videoInfo && (
       <div className={style.detailWrap}>
         <div className={style.videoInfo}>
-          <div className={style.video}>
+          <div className={style.videoWrap}>
             <iframe
-              id="player"
-              type="text/html"
-              width="100%"
-              height="100%"
+              className={style.video}
               src={`http://www.youtube.com/embed/${videoInfo.id}`}
-              frameBorder="0"
-              allowFullScreen
+              allowfullscreen
             ></iframe>
           </div>
           <div className={style.tagsWrap}>
@@ -163,7 +159,7 @@ function VideoDetail(props) {
               videoInfo.snippet.tags.map((tag, index) => {
                 return (
                   <>
-                    {index < 5 && (
+                    {index < 2 && (
                       <span
                         key={index}
                         className={style.tags}

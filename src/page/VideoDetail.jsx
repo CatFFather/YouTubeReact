@@ -34,7 +34,7 @@ function VideoDetail(props) {
   // 2. pathname이 변경 될 때 getVideoInfo 함수 재호출
   useEffect(() => {
     getVideoInfo();
-    getVideoComment();
+    // getVideoComment();
   }, [location.pathname]);
 
   // 3. 비디오 상세 정보 받아오기

@@ -34,7 +34,7 @@ function VideoDetail(props) {
   // 2. pathname이 변경 될 때 getVideoInfo 함수 재호출
   useEffect(() => {
     getVideoInfo();
-    // getVideoComment();
+    getVideoComment();
   }, [location.pathname]);
 
   // 3. 비디오 상세 정보 받아오기
@@ -159,7 +159,7 @@ function VideoDetail(props) {
               videoInfo.snippet.tags.map((tag, index) => {
                 return (
                   <>
-                    {index < 2 && (
+                    {index < 3 && (
                       <span
                         key={index}
                         className={style.tags}
@@ -175,14 +175,26 @@ function VideoDetail(props) {
               })}
           </div>
           <p className={style.videoTitle}>{videoInfo.snippet.title}</p>
-          <p className={style.date}>
-            {videoInfo.statistics.viewCount && (
-              <>
-                조회수 {numberWithCommas(videoInfo.statistics.viewCount)}회
-                <div className={style.dot}></div>
-              </>
-            )}
-            {formatDate(videoInfo.snippet.publishedAt)}
+          <p className={style.countAndDate}>
+            <div>
+              {videoInfo.statistics.viewCount && (
+                <>
+                  조회수 {numberWithCommas(videoInfo.statistics.viewCount)}회
+                  <div className={style.dot}></div>
+                </>
+              )}
+              {formatDate(videoInfo.snippet.publishedAt)}
+            </div>
+            <div className={style.likeCountWrap}>
+              <i class="far fa-thumbs-up bigIcon"></i>
+              <div className={style.likeCount}>
+                {numberWithCommas(videoInfo.statistics.likeCount)}
+              </div>
+              <i class="far fa-thumbs-down bigIcon"></i>
+              <div className={style.dislikeCount}>
+                {numberWithCommas(videoInfo.statistics.dislikeCount)}
+              </div>
+            </div>
           </p>
           {/* 동영상 설명란 */}
           <div className={style.descriptionWrap}>

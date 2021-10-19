@@ -22,6 +22,31 @@
   -webkit-line-clamp: 4;
   overflow: hidden;
 }
+
+.likeCountWrap {
+  font-size: 14px;
+  color: #606060;
+  display: flex;
+  align-items: center;
+  padding: 10px 0px;
+}
+.likeCountWrap i {
+  cursor: pointer;
+}
+.myComment,
 .likeCount {
-  font-size: 12px;
+  margin: 0px 5px;
+}
+.repliesWrap {
+  display: flex;
+  align-items: center;
+  color: #065fd4;
+  font-size: 14px;
+}
+.repliesWrap span {
+  margin-right: 5px;
+  cursor: pointer;
+}
+.repliesWrap i {
+  margin-right: 5px;
 }

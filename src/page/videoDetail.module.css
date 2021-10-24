@@ -2,7 +2,7 @@
   max-width: 1300px;
   margin: auto;
   display: flex;
-  height: 100%;
+  /* height: 100%; */
 }
 
 /* 비디오 정보 */
@@ -152,6 +152,7 @@
 @media screen and (max-width: 780px) {
   .detailWrap {
     flex-direction: column;
+    width: 100%;
   }
   .playList {
     margin-top: 10px;

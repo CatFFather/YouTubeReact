@@ -55,7 +55,7 @@ function VideoDetail(props) {
     const filter = {
       part: ["snippet", "statistics"],
       chart: "mostPopular",
-      maxResults: 30,
+      maxResults: 40,
       regionCode: "KR",
     };
     apiService.getMostPopularList(filter).then((res) => {
@@ -73,7 +73,6 @@ function VideoDetail(props) {
     });
     const filter = {
       part: "snippet",
-      maxResults: 50,
       id: channelIdArr,
     };
     apiService.getChannelsInfo(filter).then((res) => {
@@ -100,7 +99,7 @@ function VideoDetail(props) {
     const filter = {
       part: ["snippet", "replies"],
       videoId: id,
-      maxResults: 30,
+      maxResults: 25,
       order: commentOrder,
     };
     apiService.getVideoComment(filter).then((res) => {

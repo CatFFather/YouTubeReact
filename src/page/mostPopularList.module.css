@@ -1,0 +1,13 @@
+.popularListWrap {
+  display: flex;
+  flex-wrap: wrap;
+}
+.popularLisCardWrap {
+  display: inline-block;
+  margin: 7px;
+  cursor: pointer;
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 280px;
+  max-width: 320px;
+}

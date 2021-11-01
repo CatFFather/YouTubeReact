@@ -3,11 +3,11 @@
   padding: 0;
 }
 html {
-  height: 100%;
+  height: 100%; /*이게 100% 이면 스크롤 이벤트가 적용이 안됨*/
   width: 100%;
 }
 body {
-  height: 100%;
+  height: 100%; /*이게 100% 이면 스크롤 이벤트가 적용이 안됨*/
   width: 100%;
   /* fontFamily: 'Noto Sans KR', */
 }

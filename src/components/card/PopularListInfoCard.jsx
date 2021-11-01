@@ -1,5 +1,4 @@
 import React from "react";
-import { useHistory } from "react-router-dom";
 
 // CSS
 import style from "./popularListInfoCard.module.css";
@@ -14,22 +13,11 @@ import { numberWithCommas, timeForToday } from "../../util/util";
  */
 
 // 인기 목록의 비디오 정보 card
-function VideoInfoCard(props) {
+function PopularListInfoCard(props) {
   const { videoInfo } = props;
-  const history = useHistory();
-
-  // 클릭시 상세보기 페이지로 이동
-  function videoDetail(id) {
-    history.push(`/videoDtail/${id}`);
-  }
 
   return (
-    <div
-      className={style.cardWrap}
-      onClick={() => {
-        videoDetail(videoInfo.id);
-      }}
-    >
+    <>
       <div className={style.thumbnailImg}>
         <img src={videoInfo.snippet.thumbnails.medium.url} width={"100%"}></img>
       </div>
@@ -50,15 +38,15 @@ function VideoInfoCard(props) {
           >
             {videoInfo.snippet.channelTitle}
           </p>
-          <p className={style.viewCount}>
+          <div className={style.viewCount}>
             조회수 {numberWithCommas(videoInfo.statistics.viewCount)}회
             <div className={style.dot}></div>
             {timeForToday(videoInfo.snippet.publishedAt)}
-          </p>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 
-export default VideoInfoCard;
+export default PopularListInfoCard;

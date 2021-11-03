@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useParams, useHistory, useLocation } from "react-router-dom";
+import { useInView } from "react-intersection-observer";
 
 // CSS
 import style from "./videoDetail.module.css";
@@ -21,10 +22,19 @@ function VideoDetail(props) {
   const location = useLocation();
   const commentOrderSelectBox = useRef();
   const [videoInfo, setVideoInfo] = useState(null); // 비디오 상세 정보
-  const [popularList, setPopularList] = useState([]); // 인기 목록 + 채널 썸네일
   const [moreAndLessBtn, setMoreAndLessBtn] = useState("더보기"); // 더보기 버튼 변경
+  // 인기 목록
+  const [popularList, setPopularList] = useState([]); // 인기 목록 + 채널 썸네일
+  const [popularPageToken, setPopularPageToken] = useState(null); // 인기목록 페이지 토큰
+  // 댓글
   const [commentList, setCommentList] = useState([]); // 댓글 리스트
+  const [commentPageToken, setCommentPageToken] = useState(null); // 댓글목록 페이지 토큰
   const [commentOrder, setCommentOrder] = useState("relevance"); // 댓글 정렬 (기본값 추천수)
+  // 무한 스크롤 페이징 처리
+  const [comentRef, comentInView] = useInView();
+  const [popularRef, popularInView] = useInView();
+  const [comentLoading, setComentLoading] = useState(false);
+  const [popularLoading, setPopularLoading] = useState(false);
 
   // 1. 첫 랜더링 시
   useEffect(() => {
@@ -52,16 +62,20 @@ function VideoDetail(props) {
 
   // 4. 인기 목록 불러오기 (우측 리스트)
   function getMostPopularList() {
+    setPopularLoading(true);
     const filter = {
       part: ["snippet", "statistics"],
       chart: "mostPopular",
       maxResults: 40,
       regionCode: "KR",
+      pageToken: popularPageToken || null,
     };
     apiService.getMostPopularList(filter).then((res) => {
+      setPopularPageToken(res.data.nextPageToken);
       let videoInfos = []; // 인기 목록
       videoInfos = res.data.items; // api 호출하여 받은 인기목록 videoInfos 변수에 저장
-      setPopularList(videoInfos); // 인기 목록 + 채널 썸네일 state에 저장
+      setPopularList([...popularList, ...videoInfos]); // 인기 목록 + 채널 썸네일 state에 저장
+      setPopularLoading(false);
     });
   }
 
@@ -96,16 +110,20 @@ function VideoDetail(props) {
 
   // 6. 비디오 댓글 리스트 불러오기
   function getVideoComment() {
+    setComentLoading(true);
     const filter = {
       part: ["snippet", "replies"],
       videoId: id,
       maxResults: 25,
       order: commentOrder,
+      pageToken: commentPageToken || null,
     };
     apiService.getVideoComment(filter).then((res) => {
       let commentInfo = []; // 상세 정보
       commentInfo = res.data.items; // api 호출하여 받은 상세 정보 videoInfos 변수에 저장
-      setCommentList(commentInfo);
+      setCommentList([...commentList, ...commentInfo]);
+      setCommentPageToken(res.data.nextPageToken);
+      setComentLoading(false);
     });
   }
 
@@ -141,6 +159,23 @@ function VideoDetail(props) {
   useEffect(() => {
     getVideoComment();
   }, [commentOrder]);
+
+  // 9. 무한 스크롤 ()
+  useEffect(() => {
+    // 사용자가 마지막 요소를 보고 있고, 로딩 중이 아니라면
+    if (comentInView && !comentLoading) {
+      getVideoComment();
+    }
+  }, [comentInView, comentLoading]);
+
+  useEffect(() => {
+    // 사용자가 마지막 요소를 보고 있고, 로딩 중이 아니라면
+    if (popularList.length < 200 && popularInView && !popularLoading) {
+      console.log("popularInView", popularInView);
+      console.log("popularLoading", popularLoading);
+      getMostPopularList();
+    }
+  }, [popularInView, popularLoading]);
 
   return (
     videoInfo && (
@@ -258,6 +293,8 @@ function VideoDetail(props) {
                   onClick={() => {
                     setCommentOrder("relevance");
                     setCommentOrderSelectBox();
+                    setCommentList([]);
+                    setCommentPageToken(null);
                   }}
                 >
                   인기 댓글순
@@ -267,6 +304,8 @@ function VideoDetail(props) {
                   onClick={() => {
                     setCommentOrder("time");
                     setCommentOrderSelectBox();
+                    setCommentList([]);
+                    setCommentPageToken(null);
                   }}
                 >
                   최근 날짜순
@@ -279,7 +318,9 @@ function VideoDetail(props) {
               commentList.map((comment) => {
                 return (
                   <React.Fragment key={comment.id}>
-                    <Coment comment={comment} />
+                    <div ref={comentRef}>
+                      <Coment comment={comment} />
+                    </div>
                   </React.Fragment>
                 );
               })}
@@ -291,7 +332,15 @@ function VideoDetail(props) {
             popularList.map((videoInfo, index) => {
               return (
                 <React.Fragment key={videoInfo.id}>
-                  <DetailPagePopularCard videoInfo={videoInfo} />
+                  {popularList.length - 1 == index ? (
+                    <div ref={popularRef}>
+                      <DetailPagePopularCard videoInfo={videoInfo} />
+                    </div>
+                  ) : (
+                    <div>
+                      <DetailPagePopularCard videoInfo={videoInfo} />
+                    </div>
+                  )}
                 </React.Fragment>
               );
             })}

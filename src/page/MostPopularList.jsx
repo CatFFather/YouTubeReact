@@ -20,7 +20,7 @@ function MostPopularList(props) {
   const history = useHistory();
   const [loading, setLoading] = useState(false);
   const [popularList, setPopularList] = useState([]); // 인기 목록 + 채널 썸네일
-  const [nextPageToken, setNextPageToken] = useState(null);
+  const [nextPageToken, setNextPageToken] = useState(null); // 인기 목록 페이지 토큰
   // 1. 첫 랜더링 시 목록 불러오기
   useEffect(() => {
     getMostPopularList();

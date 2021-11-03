@@ -39,11 +39,11 @@ function DetailPagePopularCard(props) {
         >
           {videoInfo.snippet.channelTitle}
         </p>
-        <p className={style.viewCount}>
+        <div className={style.viewCount}>
           조회수 {numberWithCommas(videoInfo.statistics.viewCount)}회
           <div className={style.dot}></div>
           {timeForToday(videoInfo.snippet.publishedAt)}
-        </p>
+        </div>
       </div>
     </div>
   );

@@ -150,7 +150,7 @@ function VideoDetail(props) {
             <iframe
               className={style.video}
               src={`http://www.youtube.com/embed/${videoInfo.id}`}
-              allowfullscreen
+              allowFullScreen
             ></iframe>
           </div>
           <div className={style.tagsWrap}>
@@ -174,7 +174,7 @@ function VideoDetail(props) {
               })}
           </div>
           <p className={style.videoTitle}>{videoInfo.snippet.title}</p>
-          <p className={style.countAndDate}>
+          <div className={style.countAndDate}>
             <div>
               {videoInfo.statistics.viewCount && (
                 <>
@@ -185,16 +185,16 @@ function VideoDetail(props) {
               {formatDate(videoInfo.snippet.publishedAt)}
             </div>
             <div className={style.likeCountWrap}>
-              <i class="far fa-thumbs-up bigIcon"></i>
+              <i className="far fa-thumbs-up bigIcon"></i>
               <div className={style.likeCount}>
                 {numberWithCommas(videoInfo.statistics.likeCount)}
               </div>
-              <i class="far fa-thumbs-down bigIcon"></i>
+              <i className="far fa-thumbs-down bigIcon"></i>
               <div className={style.dislikeCount}>
                 {numberWithCommas(videoInfo.statistics.dislikeCount)}
               </div>
             </div>
-          </p>
+          </div>
           {/* 동영상 설명란 */}
           <div className={style.descriptionWrap}>
             <div className={style.descriptionLeft}>
@@ -278,9 +278,9 @@ function VideoDetail(props) {
             {commentList.length > 0 &&
               commentList.map((comment) => {
                 return (
-                  <>
-                    <Coment key={comment.id} comment={comment} />
-                  </>
+                  <React.Fragment key={comment.id}>
+                    <Coment comment={comment} />
+                  </React.Fragment>
                 );
               })}
           </div>
@@ -290,10 +290,9 @@ function VideoDetail(props) {
           {popularList.length > 0 &&
             popularList.map((videoInfo, index) => {
               return (
-                <DetailPagePopularCard
-                  key={videoInfo.id}
-                  videoInfo={videoInfo}
-                />
+                <React.Fragment key={videoInfo.id}>
+                  <DetailPagePopularCard videoInfo={videoInfo} />
+                </React.Fragment>
               );
             })}
         </div>

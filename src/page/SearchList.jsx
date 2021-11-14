@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import qs from "qs";
 import { useLocation } from "react-router-dom";
+import { useInView } from "react-intersection-observer";
+
 // CSS
 import style from "./searchList.module.css";
 
@@ -16,8 +18,11 @@ import { getAllIndexes } from "../util/util";
 
 // 검색 목록
 function SearchList(props) {
+  const [ref, inView] = useInView();
+  const [loading, setLoading] = useState(false);
   const location = useLocation();
   const [searchList, setSearchList] = useState([]); // api를 통해 얻은 검색 목록
+  const [nextPageToken, setNextPageToken] = useState(null); // 검색 목록 페이지 토큰
 
   // 1. query 변경 시 리스트 갱신
   const query = qs.parse(location.search.replace("?", ""));
@@ -27,12 +32,15 @@ function SearchList(props) {
 
   // 키워드 검색 불러오기
   function getSearchList() {
+    setLoading(true);
     const filter = {
       part: "snippet",
       maxResults: 25,
       q: query.q,
+      pageToken: nextPageToken || null,
     };
     apiService.getSearchList(filter).then((res) => {
+      setNextPageToken(res.data.nextPageToken);
       let videoInfos = []; // 검색 목록
       videoInfos = res.data.items; // api 호출하여 받은 검색목록 videoInfos 변수에 저장
       getChannelsInfo(videoInfos); // 검색목록의 채널 id를 이용하여 채널 정보 불러오기
@@ -48,7 +56,7 @@ function SearchList(props) {
 
     const filter = {
       part: "snippet",
-      maxResults: 50,
+      maxResults: 25,
       id: channelIdArr,
     };
 
@@ -67,26 +75,61 @@ function SearchList(props) {
           newChannelsInfoList[index].snippet.thumbnails;
         return item;
       });
-      setSearchList(newSearchList); // 검색 목록 + 채널 썸네일 state에 저장
+      setSearchList([...searchList, ...newSearchList]); // 검색 목록 + 채널 썸네일 state에 저장
+      setLoading(false);
     });
   }
 
+  useEffect(() => {
+    // 사용자가 마지막 요소를 보고 있고, 로딩 중이 아니라면
+    if (inView && !loading) {
+      getSearchList();
+    }
+  }, [inView, loading]);
+
+  // 페이징 처리를 위한 ref 분기 처리 , videoInfo.id.kind 의 종류에 따른 컴포넌트 분기처리
   return (
     <div className={style.searchList}>
       {searchList.length > 0 &&
         searchList.map((videoInfo, index) => {
           return (
             <>
-              {videoInfo.id.kind == "youtube#channel" ? (
-                <ChannelInfoCard
-                  key={videoInfo.id.channelId}
-                  channelInfo={videoInfo}
-                />
+              {searchList.length - 1 == index ? (
+                <>
+                  {videoInfo.id.kind == "youtube#channel" ? (
+                    <div ref={ref}>
+                      <ChannelInfoCard
+                        key={videoInfo.id.channelId}
+                        channelInfo={videoInfo}
+                      />
+                    </div>
+                  ) : (
+                    <div ref={ref}>
+                      <SearchListCard
+                        key={videoInfo.id.videoId}
+                        videoInfo={videoInfo}
+                      ></SearchListCard>
+                    </div>
+                  )}
+                </>
               ) : (
-                <SearchListCard
-                  key={videoInfo.id.videoId}
-                  videoInfo={videoInfo}
-                ></SearchListCard>
+                <>
+                  {videoInfo.id.kind == "youtube#channel" ? (
+                    <div>
+                      <ChannelInfoCard
+                        key={videoInfo.id.channelId}
+                        channelInfo={videoInfo}
+                      />
+                    </div>
+                  ) : (
+                    <div>
+                      <SearchListCard
+                        key={videoInfo.id.videoId}
+                        videoInfo={videoInfo}
+                      ></SearchListCard>
+                    </div>
+                  )}
+                </>
               )}
             </>
           );

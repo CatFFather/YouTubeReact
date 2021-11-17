@@ -160,7 +160,7 @@ function VideoDetail(props) {
     getVideoComment();
   }, [commentOrder]);
 
-  // 9. 무한 스크롤 ()
+  // 9. 무한 스크롤 (댓글)
   useEffect(() => {
     // 사용자가 마지막 요소를 보고 있고, 로딩 중이 아니라면
     if (comentInView && !comentLoading) {
@@ -168,11 +168,10 @@ function VideoDetail(props) {
     }
   }, [comentInView, comentLoading]);
 
+  // 10. 무한 스크롤 (인기 목록)
   useEffect(() => {
     // 사용자가 마지막 요소를 보고 있고, 로딩 중이 아니라면
     if (popularList.length < 200 && popularInView && !popularLoading) {
-      console.log("popularInView", popularInView);
-      console.log("popularLoading", popularLoading);
       getMostPopularList();
     }
   }, [popularInView, popularLoading]);
@@ -332,15 +331,9 @@ function VideoDetail(props) {
             popularList.map((videoInfo, index) => {
               return (
                 <React.Fragment key={videoInfo.id}>
-                  {popularList.length - 1 == index ? (
-                    <div ref={popularRef}>
-                      <DetailPagePopularCard videoInfo={videoInfo} />
-                    </div>
-                  ) : (
-                    <div>
-                      <DetailPagePopularCard videoInfo={videoInfo} />
-                    </div>
-                  )}
+                  <div ref={popularRef}>
+                    <DetailPagePopularCard videoInfo={videoInfo} />
+                  </div>
                 </React.Fragment>
               );
             })}

@@ -96,30 +96,17 @@ function MostPopularList(props) {
           popularList.map((videoInfo, index) => {
             return (
               <React.Fragment key={videoInfo.id}>
-                {popularList.length - 1 == index ? (
-                  <div
-                    ref={ref}
-                    className={style.popularLisCardWrap}
-                    onClick={() => {
-                      videoDetail(videoInfo.id);
-                    }}
-                  >
-                    <PopularListInfoCard
-                      videoInfo={videoInfo}
-                    ></PopularListInfoCard>
-                  </div>
-                ) : (
-                  <div
-                    className={style.popularLisCardWrap}
-                    onClick={() => {
-                      videoDetail(videoInfo.id);
-                    }}
-                  >
-                    <PopularListInfoCard
-                      videoInfo={videoInfo}
-                    ></PopularListInfoCard>
-                  </div>
-                )}
+                <div
+                  ref={ref}
+                  className={style.popularLisCardWrap}
+                  onClick={() => {
+                    videoDetail(videoInfo.id);
+                  }}
+                >
+                  <PopularListInfoCard
+                    videoInfo={videoInfo}
+                  ></PopularListInfoCard>
+                </div>
               </React.Fragment>
             );
           })}

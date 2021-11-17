@@ -148,6 +148,17 @@
   flex: 1 1 35%;
   padding: 5px;
 }
+/* 더보기 버튼 */
+.seeMoreBtn {
+  display: none;
+  width: 100%;
+  border: 1px solid #065fd4;
+  color: #065fd4;
+  background-color: #fff;
+  cursor: pointer;
+  padding: 10px;
+  font-size: 14px;
+}
 
 @media screen and (max-width: 780px) {
   .detailWrap {
@@ -156,5 +167,8 @@
   }
   .playList {
     margin-top: 10px;
+  }
+  .seeMoreBtn {
+    display: initial;
   }
 }

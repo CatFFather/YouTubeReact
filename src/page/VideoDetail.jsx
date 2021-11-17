@@ -20,7 +20,9 @@ function VideoDetail(props) {
   const { id } = useParams();
   const history = useHistory();
   const location = useLocation();
-  const commentOrderSelectBox = useRef();
+  const commentOrderSelectBox = useRef(); // 댓글 정렬 기준
+  const commentSeeMoreBtn = useRef(); // 댓글 더보기 버튼
+  const popularSeeMoreBtn = useRef(); // 인기목록 더보기 버튼
   const [videoInfo, setVideoInfo] = useState(null); // 비디오 상세 정보
   const [moreAndLessBtn, setMoreAndLessBtn] = useState("더보기"); // 더보기 버튼 변경
   // 인기 목록
@@ -35,6 +37,13 @@ function VideoDetail(props) {
   const [popularRef, popularInView] = useInView();
   const [comentLoading, setComentLoading] = useState(false);
   const [popularLoading, setPopularLoading] = useState(false);
+
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const handleResize = () => setWindowWidth(window.innerWidth);
+  useEffect(() => {
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   // 1. 첫 랜더링 시
   useEffect(() => {
@@ -71,6 +80,9 @@ function VideoDetail(props) {
       pageToken: popularPageToken || null,
     };
     apiService.getMostPopularList(filter).then((res) => {
+      if (!res.data.nextPageToken) {
+        popularSeeMoreBtn.current.style.display = "none";
+      }
       setPopularPageToken(res.data.nextPageToken);
       let videoInfos = []; // 인기 목록
       videoInfos = res.data.items; // api 호출하여 받은 인기목록 videoInfos 변수에 저장
@@ -119,6 +131,9 @@ function VideoDetail(props) {
       pageToken: commentPageToken || null,
     };
     apiService.getVideoComment(filter).then((res) => {
+      if (!res.data.nextPageToken) {
+        commentSeeMoreBtn.current.style.display = "none";
+      }
       let commentInfo = []; // 상세 정보
       commentInfo = res.data.items; // api 호출하여 받은 상세 정보 videoInfos 변수에 저장
       setCommentList([...commentList, ...commentInfo]);
@@ -317,12 +332,25 @@ function VideoDetail(props) {
               commentList.map((comment) => {
                 return (
                   <React.Fragment key={comment.id}>
-                    <div ref={comentRef}>
-                      <Coment comment={comment} />
-                    </div>
+                    {windowWidth > 780 ? (
+                      <div ref={comentRef}>
+                        <Coment comment={comment} />
+                      </div>
+                    ) : (
+                      <div>
+                        <Coment comment={comment} />
+                      </div>
+                    )}
                   </React.Fragment>
                 );
               })}
+            <button
+              ref={commentSeeMoreBtn}
+              className={style.seeMoreBtn}
+              onClick={getVideoComment}
+            >
+              더보기
+            </button>
           </div>
         </div>
         {/* 오른쪽 인기 목록 */}
@@ -331,12 +359,25 @@ function VideoDetail(props) {
             popularList.map((videoInfo, index) => {
               return (
                 <React.Fragment key={videoInfo.id}>
-                  <div ref={popularRef}>
-                    <DetailPagePopularCard videoInfo={videoInfo} />
-                  </div>
+                  {windowWidth > 780 ? (
+                    <div ref={popularRef}>
+                      <DetailPagePopularCard videoInfo={videoInfo} />
+                    </div>
+                  ) : (
+                    <div>
+                      <DetailPagePopularCard videoInfo={videoInfo} />
+                    </div>
+                  )}
                 </React.Fragment>
               );
             })}
+          <button
+            ref={popularSeeMoreBtn}
+            className={style.seeMoreBtn}
+            onClick={getMostPopularList}
+          >
+            더보기
+          </button>
         </div>
       </div>
     )

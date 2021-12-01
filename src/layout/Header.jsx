@@ -1,10 +1,11 @@
 import React, { useRef, useState, useEffect } from 'react';
 import style from './header.module.css';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 
 // 상단 검색 헤더
 function Header() {
     const history = useHistory();
+    const location = useLocation();
     const keyWord = useRef(); // ref 를 이용한 keyWord 관리
     const menuAsideWrap = useRef(); // 왼쪽 사이드 메뉴 wrap
     const menuAside = useRef(); // 왼쪽 사이드 메뉴
@@ -40,6 +41,7 @@ function Header() {
             menuAsideWrap.current.style.pointerEvents = 'none';
         }
     }, [menuOpen]);
+
     return (
         <>
             <header className={style.wrap}>
@@ -70,7 +72,22 @@ function Header() {
             </header>
             <aside ref={menuAsideWrap} className={style.menuAsideWrap}>
                 <div ref={menuAside} className={style.menuAside}>
-                    사이드 메뉴 활성화
+                    <div className={`${location.pathname == '/mostPopularList' ? [style.menuItemWrap, style.menuItemWrapBg].join(' ') : style.menuItemWrap}`}>
+                        <div className={style.menuItemImg}>이미지</div>
+                        <div>홈</div>
+                    </div>
+                    <div className={`${location.pathname == '/searchList' ? [style.menuItemWrap, style.menuItemWrapBg].join(' ') : style.menuItemWrap}`}>
+                        <div className={style.menuItemImg}>이미지</div>
+                        <div>탐색</div>
+                    </div>
+                    <div className={style.menuItemWrap}>
+                        <div className={style.menuItemImg}>이미지</div>
+                        <div>구독</div>
+                    </div>
+                    <div className={style.menuItemWrap}>
+                        <div className={style.menuItemImg}>이미지</div>
+                        <div>Originals</div>
+                    </div>
                 </div>
                 <div ref={menuAsideBackground} className={style.menuAsideBackground} onClick={clickMenuBtn}></div>
             </aside>

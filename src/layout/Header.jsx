@@ -42,6 +42,12 @@ function Header() {
         }
     }, [menuOpen]);
 
+    // 4. 메뉴 아이템 선택
+    function selectMenu(path) {
+        history.push(`/${path}`);
+        setMenuOpen(!menuOpen);
+    }
+
     return (
         <>
             <header className={style.wrap}>
@@ -72,11 +78,21 @@ function Header() {
             </header>
             <aside ref={menuAsideWrap} className={style.menuAsideWrap}>
                 <div ref={menuAside} className={style.menuAside}>
-                    <div className={`${location.pathname == '/mostPopularList' ? [style.menuItemWrap, style.menuItemWrapBg].join(' ') : style.menuItemWrap}`}>
+                    <div
+                        className={`${location.pathname == '/mostPopularList' ? [style.menuItemWrap, style.menuItemWrapBg].join(' ') : style.menuItemWrap}`}
+                        onClick={() => {
+                            selectMenu('mostPopularList');
+                        }}
+                    >
                         <div className={style.menuItemImg}>이미지</div>
                         <div>홈</div>
                     </div>
-                    <div className={`${location.pathname == '/searchList' ? [style.menuItemWrap, style.menuItemWrapBg].join(' ') : style.menuItemWrap}`}>
+                    <div
+                        className={`${location.pathname == '/searchList' ? [style.menuItemWrap, style.menuItemWrapBg].join(' ') : style.menuItemWrap}`}
+                        onClick={() => {
+                            selectMenu('searchList');
+                        }}
+                    >
                         <div className={style.menuItemImg}>이미지</div>
                         <div>탐색</div>
                     </div>

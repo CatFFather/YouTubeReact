@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Router, Switch, Route, Link } from 'react-router-dom';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 // CSS
 import './globalStyles.css'; // 전역 스타일 CSS

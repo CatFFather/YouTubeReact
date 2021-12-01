@@ -48,3 +48,27 @@
     padding: 4.5px 15px;
     cursor: pointer;
 }
+
+/* 메뉴 버튼 클릭 시 왼쪽 사이드 메뉴 활성화 */
+.menuAsideWrap {
+    z-index: 9;
+    transition: all ease 0.3s;
+    position: absolute;
+    top: 61px;
+    left: 0;
+    width: 100%;
+    height: calc(100% - 61px);
+    display: flex;
+    opacity: 0;
+    pointer-events: none;
+}
+.menuAside {
+    width: 240px;
+    height: 100%;
+    background-color: white;
+}
+.menuAsideBackground {
+    width: calc(100% - 240px);
+    background-color: black;
+    opacity: 0.7;
+}

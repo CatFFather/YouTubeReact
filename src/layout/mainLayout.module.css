@@ -1,6 +1,5 @@
 /* MainLayout CSS */
 .main__container {
-    position: relative;
     height: 100%;
     overflow: auto;
     background-color: #f9f9f9;

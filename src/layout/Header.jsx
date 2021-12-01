@@ -21,13 +21,7 @@ function Header() {
         keyWord.current.value = ''; // 값 초기화
         setSearchCount(searchCount + 1);
     }
-
-    // 2. 로고 클릭 시 인기 목록으로 이동
-    function goToMostPopularList() {
-        history.push(`/mostPopularList`);
-    }
-
-    // 3. 메뉴 버튼 클릭 시 사이드 메뉴 활성화
+    // 2. 메뉴 버튼 클릭 시 사이드 메뉴 활성화
     function clickMenuBtn() {
         setMenuOpen(!menuOpen);
     }
@@ -42,7 +36,7 @@ function Header() {
         }
     }, [menuOpen]);
 
-    // 4. 메뉴 아이템 선택
+    // 3. 메뉴 아이템 선택
     function selectMenu(path) {
         history.push(`/${path}`);
         setMenuOpen(!menuOpen);
@@ -53,7 +47,13 @@ function Header() {
             <header className={style.wrap}>
                 <div className={style.headerLeft}>
                     <img className={style.menuBtn} src="/images/menu.png" onClick={clickMenuBtn} />
-                    <img className={style.logo} src="/images/logo.png" onClick={goToMostPopularList} />
+                    <img
+                        className={style.logo}
+                        src="/images/logo.png"
+                        onClick={() => {
+                            selectMenu('mostPopularList');
+                        }}
+                    />
                 </div>
                 <div className={style.headerCenter}>
                     <input

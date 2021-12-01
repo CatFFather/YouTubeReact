@@ -28,7 +28,9 @@ function SearchList(props) {
     // 1. query 변경 시 리스트 갱신
     const query = qs.parse(location.search.replace('?', ''));
     useEffect(() => {
-        if (!location.search == (null || '')) {
+        if (location.search == (null || '')) {
+            setSearchList([]);
+        } else {
             getSearchList();
         }
     }, [location.search]);
@@ -92,39 +94,46 @@ function SearchList(props) {
     // 페이징 처리를 위한 ref 분기 처리 , videoInfo.id.kind 의 종류에 따른 컴포넌트 분기처리
     return (
         <div className={style.searchList}>
-            {searchList.length > 0
-                ? searchList.map((videoInfo, index) => {
-                      return (
-                          <>
-                              {searchList.length - 1 == index ? (
-                                  <>
-                                      {videoInfo.id.kind == 'youtube#channel' ? (
-                                          <div ref={ref}>
-                                              <ChannelInfoCard key={videoInfo.id.channelId} channelInfo={videoInfo} />
-                                          </div>
-                                      ) : (
-                                          <div ref={ref}>
-                                              <SearchListCard key={videoInfo.id.videoId} videoInfo={videoInfo}></SearchListCard>
-                                          </div>
-                                      )}
-                                  </>
-                              ) : (
-                                  <>
-                                      {videoInfo.id.kind == 'youtube#channel' ? (
-                                          <div>
-                                              <ChannelInfoCard key={videoInfo.id.channelId} channelInfo={videoInfo} />
-                                          </div>
-                                      ) : (
-                                          <div>
-                                              <SearchListCard key={videoInfo.id.videoId} videoInfo={videoInfo}></SearchListCard>
-                                          </div>
-                                      )}
-                                  </>
-                              )}
-                          </>
-                      );
-                  })
-                : '빈값'}
+            {searchList.length > 0 ? (
+                searchList.map((videoInfo, index) => {
+                    return (
+                        <>
+                            {searchList.length - 1 == index ? (
+                                <>
+                                    {videoInfo.id.kind == 'youtube#channel' ? (
+                                        <div ref={ref}>
+                                            <ChannelInfoCard key={videoInfo.id.channelId} channelInfo={videoInfo} />
+                                        </div>
+                                    ) : (
+                                        <div ref={ref}>
+                                            <SearchListCard key={videoInfo.id.videoId} videoInfo={videoInfo}></SearchListCard>
+                                        </div>
+                                    )}
+                                </>
+                            ) : (
+                                <>
+                                    {videoInfo.id.kind == 'youtube#channel' ? (
+                                        <div>
+                                            <ChannelInfoCard key={videoInfo.id.channelId} channelInfo={videoInfo} />
+                                        </div>
+                                    ) : (
+                                        <div>
+                                            <SearchListCard key={videoInfo.id.videoId} videoInfo={videoInfo}></SearchListCard>
+                                        </div>
+                                    )}
+                                </>
+                            )}
+                        </>
+                    );
+                })
+            ) : (
+                <>
+                    <div className={style.searchListLengthZero}>
+                        <img src="/images/btn_search.svg" />
+                        <p>상단에서 검색 해보세요!</p>
+                    </div>
+                </>
+            )}
         </div>
     );
 }

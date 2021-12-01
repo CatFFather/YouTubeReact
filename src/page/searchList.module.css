@@ -1,11 +1,26 @@
 .searchList {
-  max-width: 1300px;
-  margin: auto;
+    max-width: 1300px;
+    margin: auto;
+}
+.searchListLengthZero {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.searchListLengthZero img {
+    margin-top: 100%;
+    width: 200px;
+    height: 200px;
+}
+.searchListLengthZero p {
+    margin-top: 10%;
+    font-size: 20px;
 }
 
 @media screen and (max-width: 780px) {
-  .searchList {
-    display: flex;
-    flex-direction: column;
-  }
+    .searchList {
+        display: flex;
+        flex-direction: column;
+    }
 }

@@ -79,7 +79,7 @@ function Header() {
             <aside ref={menuAsideWrap} className={style.menuAsideWrap}>
                 <div ref={menuAside} className={style.menuAside}>
                     <div
-                        className={`${location.pathname == '/mostPopularList' ? [style.menuItemWrap, style.menuItemWrapBg].join(' ') : style.menuItemWrap}`}
+                        className={`${location.pathname == '/mostPopularList' ? `${style.menuItemWrap} ${style.menuItemWrapBg}` : style.menuItemWrap}`}
                         onClick={() => {
                             selectMenu('mostPopularList');
                         }}
@@ -88,7 +88,7 @@ function Header() {
                         <div>홈</div>
                     </div>
                     <div
-                        className={`${location.pathname == '/searchList' ? [style.menuItemWrap, style.menuItemWrapBg].join(' ') : style.menuItemWrap}`}
+                        className={`${location.pathname == '/searchList' ? `${style.menuItemWrap} ${style.menuItemWrapBg}` : style.menuItemWrap}`}
                         onClick={() => {
                             selectMenu('searchList');
                         }}

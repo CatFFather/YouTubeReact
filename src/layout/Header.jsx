@@ -8,8 +8,6 @@ function Header() {
     const location = useLocation();
     const keyWord = useRef(); // ref 를 이용한 keyWord 관리
     const menuAsideWrap = useRef(); // 왼쪽 사이드 메뉴 wrap
-    const menuAside = useRef(); // 왼쪽 사이드 메뉴
-    const menuAsideBackground = useRef(); // 왼쪽 사이드 메뉴 뒷 배경
 
     const [menuOpen, setMenuOpen] = useState(false); // 사이드 메뉴 오픈 여부
     const [searchCount, setSearchCount] = useState(0); // 검색 횟수 (같은 키워드로 검색 시 location.search 변화를 주기 위함) --> TODO 유지 할지 지울지 고민해보기
@@ -37,13 +35,18 @@ function Header() {
     }, [menuOpen]);
 
     // 3. 메뉴 아이템 선택
-    function selectMenu(path) {
+    function selectMenu(path, select) {
+        if (select == 'logo') {
+            setMenuOpen(false);
+        } else {
+            setMenuOpen(!menuOpen);
+        }
         history.push(`/${path}`);
-        setMenuOpen(!menuOpen);
     }
 
     return (
         <>
+            {/* 상단 검색 헤더 */}
             <header className={style.wrap}>
                 <div className={style.headerLeft}>
                     <img className={style.menuBtn} src="/images/menu.png" onClick={clickMenuBtn} />
@@ -51,7 +54,7 @@ function Header() {
                         className={style.logo}
                         src="/images/logo.png"
                         onClick={() => {
-                            selectMenu('mostPopularList');
+                            selectMenu('mostPopularList', 'logo');
                         }}
                     />
                 </div>
@@ -76,8 +79,10 @@ function Header() {
                     <div>아이템2</div>
                 </div>
             </header>
+            {/* 사이드 메뉴 전체*/}
             <aside ref={menuAsideWrap} className={style.menuAsideWrap}>
-                <div ref={menuAside} className={style.menuAside}>
+                {/* 왼쪽 메뉴 부분 */}
+                <div className={style.menuAside}>
                     <div
                         className={`${location.pathname == '/mostPopularList' ? `${style.menuItemWrap} ${style.menuItemWrapBg}` : style.menuItemWrap}`}
                         onClick={() => {
@@ -105,7 +110,8 @@ function Header() {
                         <div>Originals</div>
                     </div>
                 </div>
-                <div ref={menuAsideBackground} className={style.menuAsideBackground} onClick={clickMenuBtn}></div>
+                {/* 오른쪽 검은 배경 */}
+                <div className={style.menuAsideBackground} onClick={clickMenuBtn}></div>
             </aside>
         </>
     );

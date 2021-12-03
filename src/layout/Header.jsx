@@ -1,6 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react';
 import style from './header.module.css';
 import { useHistory, useLocation } from 'react-router-dom';
+// 메뉴 이미지 https://fonts.google.com/icons 에서 참고
 
 // 상단 검색 헤더
 function Header() {
@@ -75,8 +76,10 @@ function Header() {
                     </button>
                 </div>
                 <div className={style.headerRight}>
-                    <div>아이템1</div>
-                    <div>아이템2</div>
+                    <button className={style.loginBtn}>
+                        <i class="far fa-user-circle"></i>
+                        <span>로그인</span>
+                    </button>
                 </div>
             </header>
             {/* 사이드 메뉴 전체*/}
@@ -89,7 +92,10 @@ function Header() {
                             selectMenu('mostPopularList');
                         }}
                     >
-                        <div className={style.menuItemImg}>이미지</div>
+                        <img
+                            className={style.menuItemImg}
+                            src={`${location.pathname == '/mostPopularList' ? '/images/home_filled.svg' : '/images/home_outlined.svg'}`}
+                        />
                         <div>홈</div>
                     </div>
                     <div
@@ -98,17 +104,20 @@ function Header() {
                             selectMenu('searchList');
                         }}
                     >
-                        <div className={style.menuItemImg}>이미지</div>
+                        <img
+                            className={style.menuItemImg}
+                            src={`${location.pathname == '/searchList' ? '/images/explore_filled.svg' : '/images/explore_outlined.svg'}`}
+                        />
                         <div>탐색</div>
                     </div>
                     <div className={style.menuItemWrap}>
-                        <div className={style.menuItemImg}>이미지</div>
+                        <img className={style.menuItemImg} src="/images/subscriptions_outlined.svg" />
                         <div>구독</div>
                     </div>
-                    <div className={style.menuItemWrap}>
+                    {/* <div className={style.menuItemWrap}>
                         <div className={style.menuItemImg}>이미지</div>
                         <div>Originals</div>
-                    </div>
+                    </div> */}
                 </div>
                 {/* 오른쪽 검은 배경 */}
                 <div className={style.menuAsideBackground} onClick={clickMenuBtn}></div>

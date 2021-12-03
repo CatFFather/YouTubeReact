@@ -48,6 +48,25 @@
     padding: 4.5px 15px;
     cursor: pointer;
 }
+.loginBtn {
+    width: 100%;
+    border: 1px solid #065fd4;
+    color: #065fd4;
+    background-color: #fff;
+    cursor: pointer;
+    padding: 5px 11px;
+    font-size: 14px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.loginBtn i {
+    font-size: 20px;
+}
+.loginBtn span {
+    margin-left: 10px;
+}
 
 /* 메뉴 버튼 클릭 시 왼쪽 사이드 메뉴 활성화 */
 .menuAsideWrap {

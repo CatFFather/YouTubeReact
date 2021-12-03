@@ -77,7 +77,7 @@ function Header() {
                 </div>
                 <div className={style.headerRight}>
                     <button className={style.loginBtn}>
-                        <i class="far fa-user-circle"></i>
+                        <i className="far fa-user-circle"></i>
                         <span>로그인</span>
                     </button>
                 </div>

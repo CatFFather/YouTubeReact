@@ -17,13 +17,6 @@ function MainLayout(props) {
   const location = useLocation();
   const history = useHistory();
 
-  // 시작 시 mostPopularList 로 이동
-  useEffect(() => {
-    if (location.pathname == "/") {
-      history.push("/mostPopularList");
-    }
-  }, []);
-
   return (
     <>
       <main className={style.main__container}>
@@ -31,7 +24,11 @@ function MainLayout(props) {
         <Header></Header>
         {/* 라우팅 될 곳 */}
         <section className={style.main__section}>
-          <Route path="/mostPopularList" component={MostPopularList}></Route>
+          <Route
+            path={["/", "/mostPopularList"]}
+            component={MostPopularList}
+            exact
+          ></Route>
           <Route path="/searchList" component={SearchList}></Route>
           <Route path="/videoDtail/:id" component={VideoDetail}></Route>
         </section>

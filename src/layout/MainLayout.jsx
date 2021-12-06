@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { Route, useLocation, useHistory } from "react-router-dom";
+import React from "react";
+import { Route } from "react-router-dom";
 
 // CSS
 import style from "./mainLayout.module.css";
@@ -14,9 +14,6 @@ import VideoDetail from "../page/VideoDetail"; // 상세 페이지
 
 // 메인 레이아웃
 function MainLayout(props) {
-  const location = useLocation();
-  const history = useHistory();
-
   return (
     <>
       <main className={style.main__container}>
@@ -29,8 +26,12 @@ function MainLayout(props) {
             component={MostPopularList}
             exact
           ></Route>
-          <Route path="/searchList" component={SearchList}></Route>
-          <Route path="/videoDtail/:id" component={VideoDetail}></Route>
+          <Route path="/searchList">
+            <SearchList />
+          </Route>
+          <Route path="/videoDtail/:id">
+            <VideoDetail />
+          </Route>
         </section>
       </main>
     </>

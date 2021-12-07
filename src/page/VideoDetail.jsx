@@ -39,6 +39,7 @@ function VideoDetail(props) {
     const [comentLoading, setComentLoading] = useState(false);
     const [popularLoading, setPopularLoading] = useState(false);
 
+    // 윈도우 화면 변화 감지
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
     const handleResize = () => setWindowWidth(window.innerWidth);
     useEffect(() => {
@@ -160,8 +161,6 @@ function VideoDetail(props) {
 
     // 8. select 박스 열고 닫는 함수
     function setCommentOrderSelectBox() {
-        console.log(commentOrderSelectBox);
-        console.log(commentOrderSelectBox.current);
         if (commentOrderSelectBox.current.style.display == 'none') {
             commentOrderSelectBox.current.style.position = 'absolute';
             commentOrderSelectBox.current.style.display = '';
@@ -173,7 +172,6 @@ function VideoDetail(props) {
 
     // 8. 댓글 정렬 기준 변경시 api 재호출
     useEffect(() => {
-        console.log('commentOrder 변경 확인 : ', commentOrder);
         getVideoComment('init');
     }, [commentOrder]);
 
@@ -204,10 +202,9 @@ function VideoDetail(props) {
                         {videoInfo.snippet.tags &&
                             videoInfo.snippet.tags.map((tag, index) => {
                                 return (
-                                    <>
+                                    <React.Fragment key={tag + index}>
                                         {index < 3 && (
                                             <span
-                                                key={index}
                                                 className={style.tags}
                                                 onClick={() => {
                                                     tagSearch(tag);
@@ -216,7 +213,7 @@ function VideoDetail(props) {
                                                 #{tag}{' '}
                                             </span>
                                         )}
-                                    </>
+                                    </React.Fragment>
                                 );
                             })}
                     </div>

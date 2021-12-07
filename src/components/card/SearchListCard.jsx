@@ -10,7 +10,6 @@ import { numberWithCommas, timeForToday } from '../../util/util';
 function SearchListCard(props) {
     const history = useHistory();
     const { videoInfo } = props;
-    console.log('videoInfo', videoInfo);
 
     // 클릭시 상세보기 페이지로 이동
     function videoDetail(id) {

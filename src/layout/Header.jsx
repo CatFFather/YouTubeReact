@@ -9,6 +9,7 @@ function Header() {
     const location = useLocation();
     const keyWord = useRef(); // ref 를 이용한 keyWord 관리
     const menuAsideWrap = useRef(); // 왼쪽 사이드 메뉴 wrap
+    const latelySearchList = useRef(); // 최근검색어 wrap
 
     const [menuOpen, setMenuOpen] = useState(false); // 사이드 메뉴 오픈 여부
     const [searchCount, setSearchCount] = useState(0); // 검색 횟수 (같은 키워드로 검색 시 location.search 변화를 주기 위함) --> TODO 유지 할지 지울지 고민해보기
@@ -45,6 +46,26 @@ function Header() {
         history.push(`/${path}`);
     }
 
+    // 검색창 클릭했을 때 focus 이벤트 발생 , 벗어나면 blur 발생
+    useEffect(() => {
+        document.getElementById('keyWordSearchInput').addEventListener('focus', (event) => {
+            latelySearchList.current.style.opacity = '1';
+        });
+        document.getElementById('keyWordSearchInput').addEventListener('blur', (event) => {
+            latelySearchList.current.style.opacity = '0';
+        });
+    }, []);
+
+    // TODO 최근 검색어로 재검색
+    function latelySearch() {
+        console.log('재검색');
+    }
+
+    // TODO 최근 검색어 삭제
+    function latelySearchDelete() {
+        console.log('삭제');
+    }
+
     return (
         <>
             {/* 상단 검색 헤더 */}
@@ -60,17 +81,74 @@ function Header() {
                     />
                 </div>
                 <div className={style.headerCenter}>
-                    <input
-                        ref={keyWord}
-                        className={style.searchInput}
-                        type="text"
-                        placeholder="검색"
-                        onKeyUp={(e) => {
-                            if (e.keyCode == 13) {
-                                search();
-                            }
-                        }}
-                    ></input>
+                    <div className={style.searchInputWrap}>
+                        <input
+                            id="keyWordSearchInput"
+                            ref={keyWord}
+                            className={style.searchInput}
+                            autoComplete="off"
+                            type="text"
+                            placeholder="검색"
+                            onKeyUp={(e) => {
+                                if (e.keyCode == 13) {
+                                    search();
+                                }
+                            }}
+                        ></input>
+                        <div ref={latelySearchList} className={style.latelySearchListWrap}>
+                            <div
+                                className={style.latelySearch}
+                                onClick={(e) => {
+                                    latelySearch();
+                                }}
+                            >
+                                <span
+                                    className={style.latelySearchKeyWord}
+                                    onClick={(e) => {
+                                        latelySearch();
+                                        e.stopPropagation(); // 이벤트 버블링 방지
+                                    }}
+                                >
+                                    test1
+                                </span>
+                                <span
+                                    className={style.latelySearchDelete}
+                                    onClick={(e) => {
+                                        latelySearchDelete();
+                                        e.stopPropagation(); // 이벤트 버블링 방지
+                                    }}
+                                >
+                                    삭제
+                                </span>
+                            </div>
+                            <div
+                                className={style.latelySearch}
+                                onClick={(e) => {
+                                    latelySearch();
+                                }}
+                            >
+                                <span
+                                    className={style.latelySearchKeyWord}
+                                    onClick={(e) => {
+                                        latelySearch();
+                                        e.stopPropagation(); // 이벤트 버블링 방지
+                                    }}
+                                >
+                                    test2
+                                </span>
+                                <span
+                                    className={style.latelySearchDelete}
+                                    onClick={(e) => {
+                                        latelySearchDelete();
+                                        e.stopPropagation(); // 이벤트 버블링 방지
+                                    }}
+                                >
+                                    삭제
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
                     <button className={style.searchBtn} onClick={search}>
                         <img src="/images/btn_search.svg" />
                     </button>

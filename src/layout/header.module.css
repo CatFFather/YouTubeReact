@@ -116,6 +116,7 @@
 /* 최근 검색어 */
 .latelySearchListWrap {
     opacity: 0;
+    pointer-events: none;
     box-sizing: border-box;
     position: absolute;
     border: 1px solid #e5e5e5;

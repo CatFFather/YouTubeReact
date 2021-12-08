@@ -125,18 +125,7 @@ function Header() {
                                                     latelySearch(item.keyWord);
                                                 }}
                                             >
-                                                <span
-                                                    className={style.latelySearchKeyWord}
-                                                    onMouseDown={(e) => {
-                                                        e.preventDefault(); // onBlur 방지
-                                                    }}
-                                                    onClick={(e) => {
-                                                        latelySearch(item.keyWord);
-                                                        e.stopPropagation(); // 이벤트 버블링 방지
-                                                    }}
-                                                >
-                                                    {item.keyWord}
-                                                </span>
+                                                <span className={style.latelySearchKeyWord}>{item.keyWord}</span>
                                                 <span
                                                     className={style.latelySearchDelete}
                                                     onMouseDown={(e) => {

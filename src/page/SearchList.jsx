@@ -4,7 +4,7 @@ import { useLocation } from 'react-router-dom';
 import { useInView } from 'react-intersection-observer';
 
 // CSS
-import style from './searchList.module.css';
+import style from './css/searchList.module.css';
 
 // COMPONENT
 import SearchListCard from '../components/card/SearchListCard';

@@ -72,47 +72,6 @@
     margin-left: 10px;
 }
 
-/* 메뉴 버튼 클릭 시 왼쪽 사이드 메뉴 활성화 */
-.menuAsideWrap {
-    z-index: 9;
-    transition: all ease 0.3s;
-    position: absolute;
-    top: 61px;
-    left: 0;
-    width: 100%;
-    height: calc(100% - 61px);
-    display: flex;
-    opacity: 0;
-    pointer-events: none;
-}
-.menuAside {
-    padding: 6px 0px;
-    width: 240px;
-    background-color: white;
-}
-.menuAsideBackground {
-    width: calc(100% - 240px);
-    background-color: black;
-    opacity: 0.7;
-}
-.menuItemWrap {
-    display: flex;
-    align-items: center;
-    width: 100%;
-    margin: 2.5px 0px;
-    padding: 5px 0px;
-    cursor: pointer;
-}
-.menuItemWrapBg {
-    background: #e5e5e5;
-}
-.menuItemWrap:hover {
-    background: #e5e5e5;
-}
-.menuItemImg {
-    padding: 5px 20px;
-}
-
 /* 최근 검색어 */
 .latelySearchListWrap {
     opacity: 0;

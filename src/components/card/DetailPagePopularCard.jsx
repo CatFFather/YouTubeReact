@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 import { useHistory } from 'react-router-dom';
 
 // CSS
-import style from './detailPagePopularCard.module.css';
+import style from './css/detailPagePopularCard.module.css';
 
 // UTIL
 import { numberWithCommas, timeForToday } from '../../util/util';

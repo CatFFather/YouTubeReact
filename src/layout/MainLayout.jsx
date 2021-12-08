@@ -2,7 +2,7 @@ import React from 'react';
 import { Route } from 'react-router-dom';
 
 // CSS
-import style from './mainLayout.module.css';
+import style from './css/mainLayout.module.css';
 
 // LAYOUT
 import Header from './Header';

@@ -3,7 +3,7 @@ import { useParams, useHistory, useLocation } from 'react-router-dom';
 import { useInView } from 'react-intersection-observer';
 
 // CSS
-import style from './videoDetail.module.css';
+import style from './css/videoDetail.module.css';
 
 // SERVICE
 import apiService from '../service/apiService';

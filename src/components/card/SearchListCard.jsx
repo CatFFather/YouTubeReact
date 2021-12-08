@@ -1,7 +1,7 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 // CSS
-import style from './searchListCard.module.css';
+import style from './css/searchListCard.module.css';
 
 // UTIL
 import { numberWithCommas, timeForToday } from '../../util/util';

@@ -4,7 +4,6 @@ import style from './header.module.css';
 
 // 메뉴 리스트
 function MenuList(props) {
-    console.log(props);
     const { menuOpen, handleMenu } = props;
     const menuAsideWrap = useRef(); // 왼쪽 사이드 메뉴 wrap
 

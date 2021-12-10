@@ -2,6 +2,12 @@ import React, { useRef, useEffect } from 'react';
 import style from './css/menuList.module.css';
 // 메뉴 이미지 https://fonts.google.com/icons 에서 참고
 
+/**
+ *
+ * @param {*} menuOpen  메뉴 오픈 여부
+ * @param {*} handleMenu 메뉴 아이템 선택 함수
+ * @returns
+ */
 // 메뉴 리스트
 function MenuList(props) {
     const { menuOpen, handleMenu } = props;

@@ -3,7 +3,7 @@ import style from './css/searchInput.module.css';
 import { useHistory } from 'react-router-dom';
 
 // 상단 검색 헤더
-function SearchInput() {
+function SearchInputWeb() {
     const history = useHistory();
     const keyWord = useRef(); // ref 를 이용한 keyWord 관리
     const latelySearchListWrap = useRef(); // 최근검색어 wrap
@@ -119,4 +119,4 @@ function SearchInput() {
         </>
     );
 }
-export default SearchInput;
+export default SearchInputWeb;

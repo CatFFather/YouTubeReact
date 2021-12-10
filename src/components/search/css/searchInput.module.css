@@ -1,0 +1,57 @@
+/* search CSS */
+.searchInputWrap {
+    position: relative;
+    width: 100%;
+}
+.searchInput {
+    font-family: Montserrat;
+    font-size: 16px;
+    line-height: 20px;
+    width: 100%;
+    border: none;
+    padding: 8px 5px;
+    border: 1px solid #e5e5e5;
+    transition: border 300ms ease-out;
+}
+.searchInput:focus {
+    outline: none;
+    border: 1px solid #000000;
+}
+.searchBtn {
+    border: none;
+    border: 1px solid #e5e5e5;
+    padding: 4.5px 15px;
+    cursor: pointer;
+}
+
+/* 최근 검색어 */
+.latelySearchListWrap {
+    opacity: 0;
+    pointer-events: none;
+    box-sizing: border-box;
+    position: absolute;
+    border: 1px solid #e5e5e5;
+    top: 37px;
+    width: 100%;
+    background-color: white;
+    padding: 15px 0px;
+}
+.latelySearch {
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 0px;
+}
+.latelySearch:hover {
+    background-color: #e5e5e5;
+}
+.latelySearchKeyWord {
+    margin-left: 10px;
+    font-size: 17px;
+}
+.latelySearchDelete {
+    font-size: 14px;
+    margin-right: 25px;
+    color: #065fd4;
+}

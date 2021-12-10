@@ -47,3 +47,18 @@
 .loginBtn span {
     margin-left: 10px;
 }
+
+@media screen and (max-width: 780px) {
+    .headerCenter {
+        width: initial;
+    }
+    .headerRight {
+        display: none;
+    }
+    .searchBtn {
+        border: none;
+        padding: 4.5px 15px;
+        cursor: pointer;
+        background: initial;
+    }
+}

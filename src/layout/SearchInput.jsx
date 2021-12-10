@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
-import style from './css/header.module.css';
+import style from './css/searchInput.module.css';
 import { useHistory } from 'react-router-dom';
 
 // 상단 검색 헤더

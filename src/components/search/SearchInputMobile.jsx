@@ -49,7 +49,6 @@ const SearchInputMobile = React.forwardRef((props, ref) => {
 
     // 5. latelySearchList 변경시 localStorage 에 저장
     useEffect(() => {
-        console.log('latelySearchList저장!!!', latelySearchList);
         localStorage.setItem('latelySearchList', JSON.stringify(latelySearchList));
     }, [latelySearchList]);
 

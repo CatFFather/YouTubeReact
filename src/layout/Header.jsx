@@ -1,79 +1,71 @@
 import React, { useRef, useState, useEffect } from 'react';
-import style from './header.module.css';
+import style from './css/header.module.css';
 import { useHistory, useLocation } from 'react-router-dom';
-// 메뉴 이미지 https://fonts.google.com/icons 에서 참고
+
+// COMPONENT
+import MenuList from './MenuList';
+import SearchInputWeb from '../components/search/SearchInputWeb';
+import SearchInputMobile from '../components/search/SearchInputMobile';
 
 // 상단 검색 헤더
 function Header() {
     const history = useHistory();
-    const location = useLocation();
-    const keyWord = useRef(); // ref 를 이용한 keyWord 관리
-    const menuAsideWrap = useRef(); // 왼쪽 사이드 메뉴 wrap
-
+    const headerWrap = useRef();
     const [menuOpen, setMenuOpen] = useState(false); // 사이드 메뉴 오픈 여부
-    const [searchCount, setSearchCount] = useState(0); // 검색 횟수 (같은 키워드로 검색 시 location.search 변화를 주기 위함) --> TODO 유지 할지 지울지 고민해보기
+    const [mobileSearchModal, setMobileSearchModal] = useState(false); // 모바일 모달창 오픈 여부
 
-    // 1. 검색 시 searchList로 이동 --> 쿼리를 이용 하여 파라미터 보내주기
-    function search() {
-        if (keyWord.current.value == (null || '')) return;
-        history.push(`/searchList?q=${keyWord.current.value}&searchCount=${searchCount}`);
-        keyWord.current.value = ''; // 값 초기화
-        setSearchCount(searchCount + 1);
-    }
-    // 2. 메뉴 버튼 클릭 시 사이드 메뉴 활성화
-    function clickMenuBtn() {
-        setMenuOpen(!menuOpen);
-    }
-    // menuOpen 에 따른 분기처리
+    // 윈도우 화면 변화 감지
+    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+    const handleResize = () => setWindowWidth(window.innerWidth);
     useEffect(() => {
-        if (menuOpen == true) {
-            menuAsideWrap.current.style.opacity = 1;
-            menuAsideWrap.current.style.pointerEvents = 'auto';
-        } else {
-            menuAsideWrap.current.style.opacity = 0;
-            menuAsideWrap.current.style.pointerEvents = 'none';
-        }
-    }, [menuOpen]);
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
 
-    // 3. 메뉴 아이템 선택
-    function selectMenu(path, select) {
+    // 1. 메뉴 아이템 선택
+    function handleMenu(path, select) {
         if (select == 'logo') {
             setMenuOpen(false);
         } else {
             setMenuOpen(!menuOpen);
         }
-        history.push(`/${path}`);
+        path && history.push(`/${path}`);
+    }
+
+    // 2. 모바일 일때 검색 버튼 클릭
+    function mobileSearchModalOpen() {
+        headerWrap.current.style.display = 'none';
+        setMobileSearchModal(true);
     }
 
     return (
         <>
             {/* 상단 검색 헤더 */}
-            <header className={style.wrap}>
+            <header ref={headerWrap} className={style.wrap}>
                 <div className={style.headerLeft}>
-                    <img className={style.menuBtn} src="/images/menu.png" onClick={clickMenuBtn} />
+                    <img
+                        className={style.menuBtn}
+                        src="/images/menu.png"
+                        onClick={() => {
+                            handleMenu();
+                        }}
+                    />
                     <img
                         className={style.logo}
                         src="/images/logo.png"
                         onClick={() => {
-                            selectMenu('mostPopularList', 'logo');
+                            handleMenu('mostPopularList', 'logo');
                         }}
                     />
                 </div>
                 <div className={style.headerCenter}>
-                    <input
-                        ref={keyWord}
-                        className={style.searchInput}
-                        type="text"
-                        placeholder="검색"
-                        onKeyUp={(e) => {
-                            if (e.keyCode == 13) {
-                                search();
-                            }
-                        }}
-                    ></input>
-                    <button className={style.searchBtn} onClick={search}>
-                        <img src="/images/btn_search.svg" />
-                    </button>
+                    {windowWidth > 780 ? (
+                        <SearchInputWeb />
+                    ) : (
+                        <button className={style.searchBtn} onClick={mobileSearchModalOpen}>
+                            <img src="/images/btn_search.svg" />
+                        </button>
+                    )}
                 </div>
                 <div className={style.headerRight}>
                     <button className={style.loginBtn}>
@@ -82,46 +74,14 @@ function Header() {
                     </button>
                 </div>
             </header>
-            {/* 사이드 메뉴 전체*/}
-            <aside ref={menuAsideWrap} className={style.menuAsideWrap}>
-                {/* 왼쪽 메뉴 부분 */}
-                <div className={style.menuAside}>
-                    <div
-                        className={`${location.pathname == '/mostPopularList' ? `${style.menuItemWrap} ${style.menuItemWrapBg}` : style.menuItemWrap}`}
-                        onClick={() => {
-                            selectMenu('mostPopularList');
-                        }}
-                    >
-                        <img
-                            className={style.menuItemImg}
-                            src={`${location.pathname == '/mostPopularList' ? '/images/home_filled.svg' : '/images/home_outlined.svg'}`}
-                        />
-                        <div>홈</div>
-                    </div>
-                    <div
-                        className={`${location.pathname == '/searchList' ? `${style.menuItemWrap} ${style.menuItemWrapBg}` : style.menuItemWrap}`}
-                        onClick={() => {
-                            selectMenu('searchList');
-                        }}
-                    >
-                        <img
-                            className={style.menuItemImg}
-                            src={`${location.pathname == '/searchList' ? '/images/explore_filled.svg' : '/images/explore_outlined.svg'}`}
-                        />
-                        <div>탐색</div>
-                    </div>
-                    <div className={style.menuItemWrap}>
-                        <img className={style.menuItemImg} src="/images/subscriptions_outlined.svg" />
-                        <div>구독</div>
-                    </div>
-                    {/* <div className={style.menuItemWrap}>
-                        <div className={style.menuItemImg}>이미지</div>
-                        <div>Originals</div>
-                    </div> */}
-                </div>
-                {/* 오른쪽 검은 배경 */}
-                <div className={style.menuAsideBackground} onClick={clickMenuBtn}></div>
-            </aside>
+            {/* 메뉴 목록 */}
+            <MenuList
+                menuOpen={menuOpen} // 메뉴 오픈 여부
+                handleMenu={handleMenu} // 메뉴 아이템 선택 함수
+            />
+
+            {/* 모바일 검색시 모달창 호출 */}
+            {windowWidth < 780 && <SearchInputMobile ref={headerWrap} mobileSearchModal={mobileSearchModal} setMobileSearchModal={setMobileSearchModal} />}
         </>
     );
 }

@@ -4,7 +4,7 @@ import { useLocation } from 'react-router-dom';
 import { useInView } from 'react-intersection-observer';
 
 // CSS
-import style from './searchList.module.css';
+import style from './css/searchList.module.css';
 
 // COMPONENT
 import SearchListCard from '../components/card/SearchListCard';
@@ -101,16 +101,16 @@ function SearchList(props) {
             {searchList.length > 0 ? (
                 searchList.map((videoInfo, index) => {
                     return (
-                        <>
+                        <React.Fragment key={videoInfo.id.channelId || videoInfo.id.videoId}>
                             {searchList.length - 1 == index ? (
                                 <>
                                     {videoInfo.id.kind == 'youtube#channel' ? (
                                         <div ref={ref}>
-                                            <ChannelInfoCard key={videoInfo.id.channelId} channelInfo={videoInfo} />
+                                            <ChannelInfoCard channelInfo={videoInfo} />
                                         </div>
                                     ) : (
                                         <div ref={ref}>
-                                            <SearchListCard key={videoInfo.id.videoId} videoInfo={videoInfo}></SearchListCard>
+                                            <SearchListCard videoInfo={videoInfo}></SearchListCard>
                                         </div>
                                     )}
                                 </>
@@ -118,16 +118,16 @@ function SearchList(props) {
                                 <>
                                     {videoInfo.id.kind == 'youtube#channel' ? (
                                         <div>
-                                            <ChannelInfoCard key={videoInfo.id.channelId} channelInfo={videoInfo} />
+                                            <ChannelInfoCard channelInfo={videoInfo} />
                                         </div>
                                     ) : (
                                         <div>
-                                            <SearchListCard key={videoInfo.id.videoId} videoInfo={videoInfo}></SearchListCard>
+                                            <SearchListCard videoInfo={videoInfo}></SearchListCard>
                                         </div>
                                     )}
                                 </>
                             )}
-                        </>
+                        </React.Fragment>
                     );
                 })
             ) : (

@@ -1,0 +1,64 @@
+/* Header CSS */
+.wrap,
+.headerLeft,
+.headerCenter,
+.headerRight {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.wrap {
+    z-index: 10;
+    position: sticky;
+    top: 0;
+    width: calc(100% - 40px);
+    height: 50px;
+    background: white;
+    padding: 5px 20px;
+    border-bottom: #e5e5e5 1px solid;
+}
+.headerCenter {
+    width: 40%;
+}
+.menuBtn {
+    padding-top: 5px;
+    cursor: pointer;
+}
+.logo {
+    cursor: pointer;
+}
+.loginBtn {
+    width: 100%;
+    border: 1px solid #065fd4;
+    color: #065fd4;
+    background-color: #fff;
+    cursor: pointer;
+    padding: 5px 11px;
+    font-size: 14px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.loginBtn i {
+    font-size: 20px;
+}
+.loginBtn span {
+    margin-left: 10px;
+}
+
+@media screen and (max-width: 780px) {
+    .headerCenter {
+        width: initial;
+    }
+    .headerRight {
+        display: none;
+    }
+    .searchBtn {
+        border: none;
+        padding: 4.5px 15px;
+        cursor: pointer;
+        background: initial;
+    }
+}

@@ -15,7 +15,8 @@
 .searchInputWrap i {
     font-size: 25px;
     color: #606060;
-    padding: 0px 10px;
+    padding: 5px 10px;
+    cursor: pointer;
 }
 .searchInput {
     font-family: Montserrat;

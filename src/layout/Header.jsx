@@ -34,6 +34,7 @@ function Header() {
 
     // 2. 모바일 일때 검색 버튼 클릭
     function mobileSearchModalOpen() {
+        handleMenu();
         headerWrap.current.style.display = 'none';
         setMobileSearchModal(true);
     }

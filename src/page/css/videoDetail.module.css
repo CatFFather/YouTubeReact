@@ -1,174 +1,197 @@
 .detailWrap {
-  max-width: 1300px;
-  margin: auto;
-  display: flex;
-  /* height: 100%; */
+    max-width: 1300px;
+    margin: auto;
+    display: flex;
+    /* height: 100%; */
 }
 
 /* 비디오 정보 */
 .videoInfo {
-  flex: 1 1 65%;
-  padding: 5px;
+    flex: 1 1 65%;
+    padding: 5px;
 }
 .videoWrap {
-  position: relative;
-  width: 100%;
-  padding-bottom: 56.25%;
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%;
 }
 .video {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
 }
 .tagsWrap {
-  margin-bottom: 3px;
+    margin-bottom: 3px;
 }
 .tags {
-  margin-right: 2px;
-  font-size: 12px;
-  cursor: pointer;
-  color: #065fd4;
+    margin-right: 2px;
+    font-size: 12px;
+    cursor: pointer;
+    color: #065fd4;
 }
 .videoTitle {
-  font-size: 18px;
-  margin: 10px 0px;
+    font-size: 18px;
+    margin: 10px 0px;
 }
 .channelTitle {
-  color: #030303;
-  font-weight: 700;
+    color: #030303;
+    font-weight: 700;
 }
 .countAndDate {
-  color: #606060;
-  margin-bottom: 10px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+    color: #606060;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 .likeCountWrap {
-  display: flex;
-  cursor: pointer;
+    display: flex;
+    cursor: pointer;
 }
 
 .likeCount,
 .dislikeCount {
-  margin: 0px 7px;
+    margin: 0px 7px;
 }
 .dot {
-  display: inline-block;
-  border: 2px solid #606060;
-  border-radius: 50%;
-  margin: 4px;
+    display: inline-block;
+    border: 2px solid #606060;
+    border-radius: 50%;
+    margin: 4px;
 }
 
 /* 설명 부분 */
 .descriptionWrap {
-  display: flex;
-  border-top: 1px solid #e5e5e5;
-  border-bottom: 1px solid #e5e5e5;
-  padding: 20px 0px;
+    display: flex;
+    border-top: 1px solid #e5e5e5;
+    border-bottom: 1px solid #e5e5e5;
+    padding: 20px 0px;
 }
 .channelThumbnails {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  margin-right: 13px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 13px;
 }
 .descriptionRight {
-  font-size: 14px;
-  width: 100%;
+    font-size: 14px;
+    word-break: break-all;
 }
 .descriptionLess {
-  margin-top: 10px;
-  margin-bottom: 10px;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
-  overflow: hidden;
-  white-space: pre-wrap;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    white-space: pre-wrap;
 }
 .descriptionMore {
-  margin-top: 10px;
-  white-space: pre-wrap;
+    margin-top: 10px;
+    white-space: pre-wrap;
 }
 .moreAndLessBtn {
-  cursor: pointer;
-  font-size: 13px;
-  color: #606060;
+    cursor: pointer;
+    font-size: 13px;
+    color: #606060;
 }
 .subscribeBtnWrap {
-  margin: 5px;
+    margin: 5px;
 }
 .subscribeBtn {
-  cursor: pointer;
-  width: 72px;
-  height: 39px;
-  background-color: #cc0000;
-  border: none;
-  color: #ffffff;
+    cursor: pointer;
+    width: 72px;
+    height: 39px;
+    background-color: #cc0000;
+    border: none;
+    color: #ffffff;
 }
 /* 댓글 부분 */
 .commentInfo {
-  padding: 15px 0px;
-  font-size: 16px;
-  display: flex;
+    padding: 15px 0px;
+    font-size: 16px;
+    display: flex;
 }
 .commentOrderWrap {
-  position: relative;
+    position: relative;
 }
 .commentOrderBtn {
-  font-size: 14px;
-  display: flex;
-  align-items: center;
-  background-color: initial;
-  border: none;
-  cursor: pointer;
-  margin: 0px 13px;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    background-color: initial;
+    border: none;
+    cursor: pointer;
+    margin: 0px 13px;
 }
 .commentOrderSelectBox {
-  background-color: #fff;
-  transition: all 300ms ease;
-  top: 30px;
-  right: 0;
-  padding: 10px 0px;
+    background-color: #fff;
+    transition: all 300ms ease;
+    top: 30px;
+    right: 0;
+    padding: 10px 0px;
 }
 .commentOrderOption {
-  cursor: pointer;
-  font-size: 14px;
-  padding: 15px;
+    cursor: pointer;
+    font-size: 14px;
+    padding: 15px;
 }
 .commentOrderOption:hover {
-  background-color: rgba(0, 0, 0, 0.1);
+    background-color: rgba(0, 0, 0, 0.1);
 }
 
 /* 오른쪽 리스트 */
 .playList {
-  flex: 1 1 35%;
-  padding: 5px;
+    flex: 1 1 35%;
+    padding: 5px;
 }
 /* 더보기 버튼 */
 .seeMoreBtn {
-  display: none;
-  width: 100%;
-  border: 1px solid #065fd4;
-  color: #065fd4;
-  background-color: #fff;
-  cursor: pointer;
-  padding: 10px;
-  font-size: 14px;
+    display: none;
+    width: 100%;
+    border: 1px solid #065fd4;
+    color: #065fd4;
+    background-color: #fff;
+    cursor: pointer;
+    padding: 10px;
+    font-size: 14px;
 }
 
 @media screen and (max-width: 780px) {
-  .detailWrap {
-    flex-direction: column;
-    width: 100%;
-  }
-  .playList {
-    margin-top: 10px;
-  }
-  .seeMoreBtn {
-    display: initial;
-  }
+    .detailWrap {
+        flex-direction: column;
+        width: 100%;
+    }
+    .videoTitle {
+        font-size: 16px;
+    }
+    .countAndDate {
+        font-size: 14px;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .likeCountWrap {
+        margin-top: 5px;
+    }
+    .playList {
+        margin-top: 10px;
+    }
+    .seeMoreBtn {
+        display: initial;
+    }
+    .descriptionWrap {
+        margin: 0px -20px;
+    }
+    /* .descriptionLess {
+        display: none;
+    }
+    .descriptionMore {
+        display: none;
+    }
+    .moreAndLessBtn {
+        display: none;
+    } */
 }

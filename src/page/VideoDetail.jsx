@@ -243,27 +243,27 @@ function VideoDetail(props) {
                                 width={videoInfo.snippet.channelThumbnails.default.width}
                                 height={videoInfo.snippet.channelThumbnails.default.height}
                             ></img>
-                        </div>
-
-                        <div className={style.descriptionRight}>
-                            <p className={style.channelTitle}>{videoInfo.snippet.channelTitle}</p>
-                            <p
-                                className={moreAndLessBtn == '더보기' ? style.descriptionLess : style.descriptionMore}
-                                dangerouslySetInnerHTML={{
-                                    __html: videoInfo.snippet.localized.description,
-                                }}
-                            ></p>
-                            <div>
-                                <span
-                                    className={style.moreAndLessBtn}
-                                    onClick={() => {
-                                        getMoreAndLessBtn();
+                            <div className={style.description}>
+                                <p className={style.channelTitle}>{videoInfo.snippet.channelTitle}</p>
+                                <p
+                                    className={moreAndLessBtn == '더보기' ? style.descriptionLess : style.descriptionMore}
+                                    dangerouslySetInnerHTML={{
+                                        __html: videoInfo.snippet.localized.description,
                                     }}
-                                >
-                                    {moreAndLessBtn}
-                                </span>
+                                ></p>
+                                <div>
+                                    <span
+                                        className={style.moreAndLessBtn}
+                                        onClick={() => {
+                                            getMoreAndLessBtn();
+                                        }}
+                                    >
+                                        {moreAndLessBtn}
+                                    </span>
+                                </div>
                             </div>
                         </div>
+
                         <div className={style.subscribeBtnWrap}>
                             <button className={style.subscribeBtn}>구독</button>
                         </div>

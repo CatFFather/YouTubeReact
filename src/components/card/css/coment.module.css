@@ -33,11 +33,12 @@
     padding: 10px 0px;
 }
 .likeCountWrap i {
+    margin: 0px 2.5px;
     cursor: pointer;
 }
-.myComment,
+.reCommentCount,
 .likeCount {
-    margin: 0px 5px;
+    margin: 0px 2.5px;
 }
 .repliesWrap {
     display: flex;

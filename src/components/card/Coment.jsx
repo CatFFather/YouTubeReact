@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 
 // CSS
 import style from './css/coment.module.css';
@@ -13,6 +13,8 @@ function Coment(props) {
     const { comment } = props;
     const textDisplay = useRef(); // 댓글 내용
     const translateBtn = useRef(); // 번역하기 버튼
+
+    const [reComentHandle, setReComentHandle] = useState(false); // 답글 보기 상태
 
     // 언어 감지
     function getLanguageDetect(coment) {
@@ -55,6 +57,11 @@ function Coment(props) {
             });
     }
 
+    // 대댓글 on/off
+    function handleReComent() {
+        setReComentHandle(!reComentHandle);
+    }
+
     return (
         <div className={style.commentWrap}>
             <div className={style.authorProfileImgWrap}>
@@ -82,12 +89,13 @@ function Coment(props) {
                     <i className="far fa-thumbs-up"></i>
                     <div className={style.likeCount}>{numberWithCommas(comment.snippet.topLevelComment.snippet.likeCount)}</div>
                     <i className="far fa-thumbs-down"></i>
-                    <div className={style.myComment}>답글</div>
+                    <i className="far fa-comment-dots"></i>
+                    {comment.snippet.totalReplyCount > 0 && <div className={style.reCommentCount}>{numberWithCommas(comment.snippet.totalReplyCount)}</div>}
                 </div>
                 {comment.snippet.totalReplyCount > 0 && (
                     <div className={style.repliesWrap}>
-                        <span>
-                            <i className="fas fa-caret-down"></i> 답글 {comment.snippet.totalReplyCount}개 보기
+                        <span onClick={handleReComent}>
+                            <i className={reComentHandle ? 'fas fa-caret-up' : 'fas fa-caret-down'}></i> 답글 {comment.snippet.totalReplyCount}개 보기
                         </span>
                     </div>
                 )}

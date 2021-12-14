@@ -57,7 +57,7 @@ function Coment(props) {
             });
     }
 
-    // 대댓글 on/off
+    // TODO 대댓글 on/off
     function handleReComent() {
         setReComentHandle(!reComentHandle);
     }
@@ -93,11 +93,11 @@ function Coment(props) {
                     {comment.snippet.totalReplyCount > 0 && <div className={style.reCommentCount}>{numberWithCommas(comment.snippet.totalReplyCount)}</div>}
                 </div>
                 {comment.snippet.totalReplyCount > 0 && (
-                    <div className={style.repliesWrap}>
+                    <button className={style.reCommentBtn}>
                         <span onClick={handleReComent}>
                             <i className={reComentHandle ? 'fas fa-caret-up' : 'fas fa-caret-down'}></i> 답글 {comment.snippet.totalReplyCount}개 보기
                         </span>
-                    </div>
+                    </button>
                 )}
             </div>
         </div>

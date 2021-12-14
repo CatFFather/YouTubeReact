@@ -40,17 +40,19 @@
 .likeCount {
     margin: 0px 2.5px;
 }
-.repliesWrap {
+.reCommentBtn {
     display: flex;
     align-items: center;
     color: #065fd4;
     font-size: 14px;
+    background-color: initial;
+    border: none;
 }
-.repliesWrap span {
+.reCommentBtn span {
     margin-right: 5px;
     cursor: pointer;
 }
-.repliesWrap i {
+.reCommentBtn i {
     margin-right: 5px;
 }
 

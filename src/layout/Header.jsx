@@ -24,7 +24,7 @@ function Header() {
 
     // 1. 메뉴 아이템 선택
     function handleMenu(path, select) {
-        if (select == 'logo') {
+        if (select == 'logo' || select == 'mobileSearch') {
             setMenuOpen(false);
         } else {
             setMenuOpen(!menuOpen);
@@ -34,6 +34,7 @@ function Header() {
 
     // 2. 모바일 일때 검색 버튼 클릭
     function mobileSearchModalOpen() {
+        handleMenu(null, 'mobileSearch');
         headerWrap.current.style.display = 'none';
         setMobileSearchModal(true);
     }

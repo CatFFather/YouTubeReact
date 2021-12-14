@@ -1,61 +1,65 @@
 .commentWrap {
-  display: flex;
-  padding: 12px 0px;
+    display: flex;
+    padding: 12px 0px;
 }
 .authorProfileImgWrap {
-  margin-right: 12px;
+    margin-right: 12px;
 }
 .authorProfileImg {
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
 }
 .authorName {
-  font-size: 13px;
-  color: #030303;
-  margin-bottom: 4px;
+    font-size: 13px;
+    color: #030303;
+    margin-bottom: 4px;
 }
 .textDisplay {
-  font-size: 14px;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 4;
-  overflow: hidden;
+    font-size: 14px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4;
+    overflow: hidden;
+    word-break: break-all;
+    margin-bottom: 10px;
 }
 
 .likeCountWrap {
-  font-size: 14px;
-  color: #606060;
-  display: flex;
-  align-items: center;
-  padding: 10px 0px;
+    font-size: 14px;
+    color: #606060;
+    display: flex;
+    align-items: center;
+    padding: 10px 0px;
 }
 .likeCountWrap i {
-  cursor: pointer;
+    margin: 0px 2.5px;
+    cursor: pointer;
 }
-.myComment,
+.reCommentCount,
 .likeCount {
-  margin: 0px 5px;
+    margin: 0px 2.5px;
 }
-.repliesWrap {
-  display: flex;
-  align-items: center;
-  color: #065fd4;
-  font-size: 14px;
+.reCommentBtn {
+    display: flex;
+    align-items: center;
+    color: #065fd4;
+    font-size: 14px;
+    background-color: initial;
+    border: none;
 }
-.repliesWrap span {
-  margin-right: 5px;
-  cursor: pointer;
+.reCommentBtn span {
+    margin-right: 5px;
+    cursor: pointer;
 }
-.repliesWrap i {
-  margin-right: 5px;
+.reCommentBtn i {
+    margin-right: 5px;
 }
 
 /* 번역하기 버튼 */
 .translateBtn {
-  /* display: none; */
-  margin-top: 10px;
-  cursor: pointer;
-  font-size: 13px;
-  color: #606060;
+    /* display: none; */
+    cursor: pointer;
+    font-size: 13px;
+    color: #606060;
 }

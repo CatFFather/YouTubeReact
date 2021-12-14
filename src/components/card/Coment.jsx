@@ -69,7 +69,7 @@ function Coment(props) {
                         __html: comment.snippet.topLevelComment.snippet.textDisplay,
                     }}
                 ></p>
-                <p
+                <span
                     ref={translateBtn}
                     className={style.translateBtn}
                     onClick={() => {
@@ -77,7 +77,7 @@ function Coment(props) {
                     }}
                 >
                     한국어 또는 영어로 번역
-                </p>
+                </span>
                 <div className={style.likeCountWrap}>
                     <i className="far fa-thumbs-up"></i>
                     <div className={style.likeCount}>{numberWithCommas(comment.snippet.topLevelComment.snippet.likeCount)}</div>

@@ -22,6 +22,7 @@
     -webkit-line-clamp: 4;
     overflow: hidden;
     word-break: break-all;
+    margin-bottom: 10px;
 }
 
 .likeCountWrap {
@@ -55,7 +56,6 @@
 /* 번역하기 버튼 */
 .translateBtn {
     /* display: none; */
-    margin-top: 10px;
     cursor: pointer;
     font-size: 13px;
     color: #606060;

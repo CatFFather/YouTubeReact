@@ -231,7 +231,7 @@ function VideoDetail(props) {
                             <i className="far fa-thumbs-up bigIcon"></i>
                             <div className={style.likeCount}>{numberWithCommas(videoInfo.statistics.likeCount)}</div>
                             <i className="far fa-thumbs-down bigIcon"></i>
-                            <div className={style.dislikeCount}>{numberWithCommas(videoInfo.statistics.dislikeCount)}</div>
+                            <div className={style.dislikeCount}>싫어요</div>
                         </div>
                     </div>
                     {/* 동영상 설명란 */}

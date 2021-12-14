@@ -48,6 +48,7 @@
     align-items: center;
 }
 .likeCountWrap {
+    font-size: 14px;
     display: flex;
     cursor: pointer;
 }

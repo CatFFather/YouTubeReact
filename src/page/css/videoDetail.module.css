@@ -99,6 +99,8 @@
     white-space: pre-wrap;
 }
 .moreAndLessBtn {
+    background-color: initial;
+    border: none;
     cursor: pointer;
     font-size: 13px;
     color: #606060;

@@ -251,16 +251,15 @@ function VideoDetail(props) {
                                         __html: videoInfo.snippet.localized.description,
                                     }}
                                 ></p>
-                                <div>
+                                <button className={style.moreAndLessBtn}>
                                     <span
-                                        className={style.moreAndLessBtn}
                                         onClick={() => {
                                             getMoreAndLessBtn();
                                         }}
                                     >
                                         {moreAndLessBtn}
                                     </span>
-                                </div>
+                                </button>
                             </div>
                         </div>
 

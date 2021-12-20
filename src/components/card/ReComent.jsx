@@ -11,7 +11,6 @@ import { numberWithCommas } from '../../util/util';
 
 function ReComent(props) {
     const { comment } = props;
-    console.log('comment', comment);
     const textDisplay = useRef(); // 댓글 내용
     const translateBtn = useRef(); // 번역하기 버튼
 

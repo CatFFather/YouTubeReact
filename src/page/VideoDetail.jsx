@@ -124,6 +124,12 @@ function VideoDetail(props) {
     // 6. 비디오 댓글 리스트 불러오기
     function getVideoComment(option) {
         setComentLoading(true);
+        option == 'init' && setCommentPageToken(null);
+        if (commentPageToken == 'pageEnd') {
+            commentSeeMoreBtn.current.style.display = 'none';
+            alert('더 이상 댓글이 없습니다.');
+            return;
+        }
         const filter = {
             part: ['snippet', 'replies'],
             videoId: id,
@@ -134,12 +140,13 @@ function VideoDetail(props) {
         option == 'init' && delete filter.pageToken;
         apiService.getVideoComment(filter).then((res) => {
             if (!res.data.nextPageToken) {
-                commentSeeMoreBtn.current.style.display = 'none';
+                setCommentPageToken('pageEnd'); // 더이상 nextPageToken이 없으면 임의로 pageEnd 값을 넣어줌
+            } else {
+                setCommentPageToken(res.data.nextPageToken);
             }
             let commentInfo = []; // 상세 정보
             commentInfo = res.data.items; // api 호출하여 받은 상세 정보 commentInfo 변수에 저장
             option == 'init' ? setCommentList(commentInfo) : setCommentList([...commentList, ...commentInfo]);
-            setCommentPageToken(res.data.nextPageToken);
             setComentLoading(false);
         });
     }
@@ -177,8 +184,8 @@ function VideoDetail(props) {
 
     // 9. 무한 스크롤 (댓글)
     useEffect(() => {
-        // 사용자가 마지막 요소를 보고 있고, 로딩 중이 아니라면
-        if (comentInView && !comentLoading) {
+        // 사용자가 마지막 요소를 보고 있고, 로딩 중이 아니고 commentPageToken 가 pageEnd가 아닐 때
+        if (comentInView && !comentLoading && commentPageToken != 'pageEnd') {
             getVideoComment();
         }
     }, [comentInView, comentLoading]);
@@ -229,7 +236,7 @@ function VideoDetail(props) {
                         </div>
                         <div className={style.likeCountWrap}>
                             <i className="far fa-thumbs-up bigIcon"></i>
-                            <div className={style.likeCount}>{numberWithCommas(videoInfo.statistics.likeCount)}</div>
+                            <div className={style.likeCount}>{videoInfo.statistics.likeCount ? numberWithCommas(videoInfo.statistics.likeCount) : 0}</div>
                             <i className="far fa-thumbs-down bigIcon"></i>
                             <div className={style.dislikeCount}>싫어요</div>
                         </div>

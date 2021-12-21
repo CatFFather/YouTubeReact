@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useState } from 'react';
 
 // CSS
-import style from './css/coment.module.css';
+import style from './css/reComent.module.css';
 
 // API
 import kakaoApiService from '../../service/kakaoApiService';

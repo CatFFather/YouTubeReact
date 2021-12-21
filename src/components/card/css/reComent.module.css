@@ -1,0 +1,50 @@
+.commentWrap {
+    display: flex;
+    padding: 10px 0px;
+}
+.authorProfileImgWrap {
+    margin-right: 10px;
+}
+.authorProfileImg {
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+}
+.authorName {
+    font-size: 13px;
+    color: #030303;
+    margin-bottom: 2px;
+}
+.textDisplay {
+    font-size: 14px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4;
+    overflow: hidden;
+    word-break: break-all;
+    margin-bottom: 8px;
+}
+
+.likeCountWrap {
+    font-size: 12px;
+    color: #606060;
+    display: flex;
+    align-items: center;
+    padding: 8px 0px;
+}
+.likeCountWrap i {
+    margin: 0px 2.5px;
+    cursor: pointer;
+}
+.reCommentCount,
+.likeCount {
+    margin: 0px 2.5px;
+}
+
+/* 번역하기 버튼 */
+.translateBtn {
+    /* display: none; */
+    cursor: pointer;
+    font-size: 13px;
+    color: #606060;
+}

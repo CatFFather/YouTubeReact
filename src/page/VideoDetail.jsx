@@ -60,6 +60,7 @@ function VideoDetail(props) {
 
     // 3. 비디오 상세 정보 받아오기
     function getVideoInfo() {
+        setMoreAndLessBtn('더보기');
         const filter = {
             part: ['snippet', 'statistics'],
             id: id,
@@ -218,6 +219,7 @@ function VideoDetail(props) {
                             })}
                     </div>
                     <p className={style.videoTitle}>{videoInfo.snippet.title}</p>
+                    {/* web / mobile 보이는 화면 다름 --> mobile은 버튼식으로 되어있음 */}
                     <div className={style.countAndDate}>
                         <div>
                             {videoInfo.statistics.viewCount && (
@@ -227,13 +229,45 @@ function VideoDetail(props) {
                             )}
                             {formatDate(videoInfo.snippet.publishedAt)}
                         </div>
+                        {/* web start*/}
                         <div className={style.likeCountWrap}>
                             <i className="far fa-thumbs-up bigIcon"></i>
                             <div className={style.likeCount}>{videoInfo.statistics.likeCount ? numberWithCommas(videoInfo.statistics.likeCount) : 0}</div>
                             <i className="far fa-thumbs-down bigIcon"></i>
                             <div className={style.dislikeCount}>싫어요</div>
+                            <i className="fas fa-share bigIcon"></i>
+                            <div className={style.dislikeCount}>공유</div>
+                            <i className="fas fa-plus bigIcon"></i>
+                            <div className={style.dislikeCount}>저장</div>
+                            <i className="fab fa-font-awesome-flag bigIcon"></i>
+                            <div className={style.dislikeCount}>신고</div>
                         </div>
+                        {/* web end*/}
                     </div>
+                    {/* mobile start*/}
+                    <ul className={style.buttonList}>
+                        <li>
+                            <i className="far fa-thumbs-up"></i>
+                            <div>{videoInfo.statistics.likeCount ? numberWithCommas(videoInfo.statistics.likeCount) : 0}</div>
+                        </li>
+                        <li>
+                            <i className="far fa-thumbs-down"></i>
+                            <div>싫어요</div>
+                        </li>
+                        <li>
+                            <i className="fas fa-share"></i>
+                            <div>공유</div>
+                        </li>
+                        <li>
+                            <i className="fas fa-plus"></i>
+                            <div>저장</div>
+                        </li>
+                        <li>
+                            <i className="fab fa-font-awesome-flag"></i>
+                            <div>신고</div>
+                        </li>
+                    </ul>
+                    {/* mobile end*/}
                     {/* 동영상 설명란 */}
                     <div className={style.descriptionWrap}>
                         <div className={style.descriptionLeft}>

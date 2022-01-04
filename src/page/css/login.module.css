@@ -1,0 +1,10 @@
+/* login */
+.container {
+    display: flex;
+    justify-content: center;
+}
+.wrap {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}

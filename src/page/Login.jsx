@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 
 // CSS
 import style from './css/login.module.css';
@@ -7,18 +8,31 @@ import style from './css/login.module.css';
 import kakaoApiService from '../service/kakaoApiService';
 
 function Login(props) {
+    const history = useHistory();
+
     // 카카오 로그인 페이지로 이동(팝업)
     function kakaoLogin() {
-        kakaoApiService.kakaoLoginPage();
+        kakaoApiService.kakaoLoginPage({
+            success: function (response) {
+                console.log('login', response);
+
+                kakaoApiService.kakaoUserInfo({
+                    success: function (response) {
+                        console.log('kakaoUserInfo', response);
+                        // 로그인 후 이동
+                        history.push('/mostPopularList');
+                    },
+                    fail: function (error) {
+                        console.log(error);
+                    },
+                });
+            },
+            fail: function (error) {
+                console.log(error);
+            },
+        });
     }
 
-    // 카카오 JavaScript 키 초기화
-    useEffect(() => {
-        const authKey = process.env.REACT_APP_KAKAO_LOGIN_KEY;
-        Kakao.init(authKey);
-        // SDK 초기화 여부를 판단합니다.(true 일때 사용 가능)
-        console.log('카카오 key 초기화 여부', Kakao.isInitialized());
-    }, []);
     return (
         <>
             <section className={style.container}>

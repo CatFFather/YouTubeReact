@@ -26,29 +26,16 @@ const getLanguagTranslate = (filter) => {
 };
 
 // 카카오 로그인 페이지로 이동(팝업)
-const kakaoLoginPage = () => {
-    return Kakao.Auth.login({
-        success: function (response) {
-            console.log('login', response);
-            kakaoUserInfo();
-        },
-        fail: function (error) {
-            console.log(error);
-        },
-    });
+const kakaoLoginPage = (params) => {
+    Kakao.Auth.login(params);
 };
 
 // 현재 카카오로 로그인한 유저 정보
-const kakaoUserInfo = () => {
+const kakaoUserInfo = (params) => {
     Kakao.API.request({
         url: '/v2/user/me',
-        success: function (response) {
-            console.log('kakaoUserInfo', response);
-            // window.location.href = window.location.origin;
-        },
-        fail: function (error) {
-            console.log(error);
-        },
+        success: params.success,
+        fail: params.fail,
     });
 };
 
@@ -56,4 +43,5 @@ export default {
     getLanguageDetect, // 인기 목록
     getLanguagTranslate, // 번역 하기
     kakaoLoginPage, // 카카오 로그인 페이지로 이동(팝업)
+    kakaoUserInfo, // 현재 카카오로 로그인한 유저 정보
 };

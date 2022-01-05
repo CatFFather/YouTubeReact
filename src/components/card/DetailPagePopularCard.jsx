@@ -5,7 +5,7 @@ import { useHistory } from 'react-router-dom';
 import style from './css/detailPagePopularCard.module.css';
 
 // UTIL
-import { numberWithCommas, timeForToday } from '../../util/util';
+import { timeForToday, viewCountCalculator } from '../../util/util';
 
 // 상세보기 오른쪽 카드
 function DetailPagePopularCard(props) {
@@ -33,7 +33,7 @@ function DetailPagePopularCard(props) {
                     {videoInfo.snippet.channelTitle}
                 </p>
                 <div className={style.viewCount}>
-                    조회수 {numberWithCommas(videoInfo.statistics.viewCount)}회<div className={style.dot}></div>
+                    조회수 {viewCountCalculator(videoInfo.statistics.viewCount)}회<div className={style.dot}></div>
                     {timeForToday(videoInfo.snippet.publishedAt)}
                 </div>
             </div>

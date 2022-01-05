@@ -2,6 +2,7 @@ import axios from 'axios';
 import qs from 'qs';
 
 const key = process.env.REACT_APP_KAKAO_API_KEY;
+const authKey = process.env.REACT_APP_KAKAO_LOGIN_KEY;
 // axios 기본 값 설정
 const axiosInstance = axios.create({
     baseURL: 'https://dapi.kakao.com/',
@@ -24,7 +25,38 @@ const getLanguagTranslate = (filter) => {
     });
 };
 
+// 카카오 로그인 페이지로 이동(팝업)
+/**
+ *
+ * @param {*} params object
+ * @param {function} params.success success callback
+ * @param {function} params.fail fail callback
+ */
+const kakaoLoginPage = (params) => {
+    Kakao.Auth.login({
+        success: params.success,
+        fail: params.fail,
+    });
+};
+
+// 현재 카카오로 로그인한 유저 정보
+/**
+ *
+ * @param {*} params object
+ * @param {function} params.success success callback
+ * @param {function} params.fail fail callback
+ */
+const kakaoUserInfo = (params) => {
+    Kakao.API.request({
+        url: '/v2/user/me',
+        success: params.success,
+        fail: params.fail,
+    });
+};
+
 export default {
     getLanguageDetect, // 인기 목록
     getLanguagTranslate, // 번역 하기
+    kakaoLoginPage, // 카카오 로그인 페이지로 이동(팝업)
+    kakaoUserInfo, // 현재 카카오로 로그인한 유저 정보
 };

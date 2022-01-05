@@ -2,6 +2,7 @@
 .searchInputWrap {
     position: relative;
     width: 100%;
+    padding: 0px 5px;
 }
 .searchInput {
     font-family: Montserrat;
@@ -28,7 +29,7 @@
 .latelySearchListWrap {
     opacity: 0;
     pointer-events: none;
-    box-sizing: border-box;
+    /* box-sizing: border-box; */
     position: absolute;
     border: 1px solid #e5e5e5;
     top: 37px;

@@ -4,7 +4,7 @@ import React from 'react';
 import style from './css/popularListInfoCard.module.css';
 
 // UTIL
-import { numberWithCommas, timeForToday } from '../../util/util';
+import { numberWithCommas, timeForToday, viewCountCalculator } from '../../util/util';
 
 /**
  *
@@ -36,7 +36,7 @@ function PopularListInfoCard(props) {
                         {videoInfo.snippet.channelTitle}
                     </p>
                     <div className={style.viewCount}>
-                        조회수 {numberWithCommas(videoInfo.statistics.viewCount)}회<div className={style.dot}></div>
+                        조회수 {viewCountCalculator(videoInfo.statistics.viewCount)}회<div className={style.dot}></div>
                         {timeForToday(videoInfo.snippet.publishedAt)}
                     </div>
                 </div>

@@ -69,7 +69,7 @@ function Header() {
                     )}
                 </div>
                 <div className={style.headerRight}>
-                    <button className={style.loginBtn}>
+                    <button className={style.loginBtn} onClick={() => history.push('/login')}>
                         <i className="far fa-user-circle"></i>
                         <span>로그인</span>
                     </button>

@@ -1,23 +1,18 @@
 import React, { useRef, useEffect, useState } from 'react';
 
 // CSS
-import style from './css/coment.module.css';
+import style from './css/reComent.module.css';
 
 // API
 import kakaoApiService from '../../service/kakaoApiService';
 
-// COMPONENT
-import ReComent from './ReComent';
-
 // UTIL
 import { numberWithCommas } from '../../util/util';
 
-function Coment(props) {
+function ReComent(props) {
     const { comment } = props;
     const textDisplay = useRef(); // 댓글 내용
     const translateBtn = useRef(); // 번역하기 버튼
-
-    const [reComentHandle, setReComentHandle] = useState(false); // 답글 보기 상태
 
     // 언어 감지
     function getLanguageDetect(coment) {
@@ -60,61 +55,37 @@ function Coment(props) {
             });
     }
 
-    //  대댓글 on/off
-    function handleReComent() {
-        setReComentHandle(!reComentHandle);
-    }
-
     return (
         <div className={style.commentWrap}>
             <div className={style.authorProfileImgWrap}>
-                <img className={style.authorProfileImg} src={comment.snippet.topLevelComment.snippet.authorProfileImageUrl} />
+                <img className={style.authorProfileImg} src={comment.snippet.authorProfileImageUrl} />
             </div>
             <div>
-                <p className={style.authorName}>{comment.snippet.topLevelComment.snippet.authorDisplayName}</p>
+                <p className={style.authorName}>{comment.snippet.authorDisplayName}</p>
                 <p
                     ref={textDisplay}
                     className={style.textDisplay}
                     dangerouslySetInnerHTML={{
-                        __html: comment.snippet.topLevelComment.snippet.textDisplay,
+                        __html: comment.snippet.textDisplay,
                     }}
                 ></p>
                 <span
                     ref={translateBtn}
                     className={style.translateBtn}
                     onClick={() => {
-                        getLanguageDetect(comment.snippet.topLevelComment.snippet.textDisplay);
+                        getLanguageDetect(comment.snippet.textDisplay);
                     }}
                 >
                     한국어 또는 영어로 번역
                 </span>
                 <div className={style.likeCountWrap}>
                     <i className="far fa-thumbs-up"></i>
-                    <div className={style.likeCount}>{numberWithCommas(comment.snippet.topLevelComment.snippet.likeCount)}</div>
+                    <div className={style.likeCount}>{numberWithCommas(comment.snippet.likeCount)}</div>
                     <i className="far fa-thumbs-down"></i>
-                    <i className="far fa-comment-dots"></i>
-                    {comment.snippet.totalReplyCount > 0 && <div className={style.reCommentCount}>{numberWithCommas(comment.snippet.totalReplyCount)}</div>}
                 </div>
-                {comment.snippet.totalReplyCount > 0 && (
-                    <>
-                        <button className={style.reCommentBtn}>
-                            <span onClick={handleReComent}>
-                                <i className={reComentHandle ? 'fas fa-caret-up' : 'fas fa-caret-down'}></i> 답글 {comment.snippet.totalReplyCount}개 보기
-                            </span>
-                        </button>
-                        {reComentHandle == true &&
-                            comment.replies.comments.map((replie) => {
-                                return (
-                                    <React.Fragment key={replie.id}>
-                                        <ReComent comment={replie} />
-                                    </React.Fragment>
-                                );
-                            })}
-                    </>
-                )}
             </div>
         </div>
     );
 }
 
-export default Coment;
+export default ReComent;

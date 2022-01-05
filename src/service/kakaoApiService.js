@@ -26,11 +26,26 @@ const getLanguagTranslate = (filter) => {
 };
 
 // 카카오 로그인 페이지로 이동(팝업)
+/**
+ *
+ * @param {*} params object
+ * @param {function} params.success success callback
+ * @param {function} params.fail fail callback
+ */
 const kakaoLoginPage = (params) => {
-    Kakao.Auth.login(params);
+    Kakao.Auth.login({
+        success: params.success,
+        fail: params.fail,
+    });
 };
 
 // 현재 카카오로 로그인한 유저 정보
+/**
+ *
+ * @param {*} params object
+ * @param {function} params.success success callback
+ * @param {function} params.fail fail callback
+ */
 const kakaoUserInfo = (params) => {
     Kakao.API.request({
         url: '/v2/user/me',

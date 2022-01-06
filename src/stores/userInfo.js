@@ -11,7 +11,6 @@ const userInfoStore = observable({
     },
     // 유저 정보 등록 함수
     setUserInfo(data) {
-        console.log('setUserInfo');
         for (const key in userInfoStore.userInfo) {
             userInfoStore.userInfo[key] = data[key];
         }

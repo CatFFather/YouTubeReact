@@ -1,6 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react';
 import style from './css/header.module.css';
 import { useHistory, useLocation, Link } from 'react-router-dom';
+import useStroe from '../stores/useStore';
 
 // COMPONENT
 import MenuList from './MenuList';
@@ -11,6 +12,7 @@ import SearchInputMobile from '../components/search/SearchInputMobile';
 function Header() {
     const history = useHistory();
     const location = useLocation();
+    const { userInfoStore } = useStroe();
     const headerWrap = useRef();
     const [menuOpen, setMenuOpen] = useState(false); // 사이드 메뉴 오픈 여부
     const [mobileSearchModal, setMobileSearchModal] = useState(false); // 모바일 모달창 오픈 여부
@@ -44,6 +46,7 @@ function Header() {
         <>
             {/* 상단 검색 헤더 */}
             <header ref={headerWrap} className={style.wrap}>
+                {/* 왼쪽 메뉴, 로고 버튼 */}
                 <div className={style.headerLeft}>
                     <img
                         className={style.menuBtn}
@@ -60,22 +63,37 @@ function Header() {
                         }}
                     />
                 </div>
+                {/* 중앙 검색 기능(모바일은 검색,로그인 버튼) */}
                 <div className={style.headerCenter}>
                     {windowWidth > 780 ? (
                         <SearchInputWeb />
                     ) : (
-                        <button className={style.searchBtn} onClick={mobileSearchModalOpen}>
-                            <img src="/images/btn_search.svg" />
-                        </button>
+                        <>
+                            <button className={style.searchBtn} onClick={mobileSearchModalOpen}>
+                                <img src="/images/btn_search.svg" />
+                            </button>
+                            {userInfoStore.userInfo.imageUrl ? (
+                                <img className={style.userImage} src={userInfoStore.userInfo.imageUrl} />
+                            ) : (
+                                <Link to={{ pathname: '/login', state: { prevPath: location.pathname } }}>
+                                    <i className="far fa-user-circle"></i>
+                                </Link>
+                            )}
+                        </>
                     )}
                 </div>
+                {/* 오른쪽 로그인(모바일은 none) */}
                 <div className={style.headerRight}>
-                    <Link to={{ pathname: '/login', state: { prevPath: location.pathname } }}>
-                        <button className={style.loginBtn}>
-                            <i className="far fa-user-circle"></i>
-                            <span>로그인</span>
-                        </button>
-                    </Link>
+                    {userInfoStore.userInfo.imageUrl ? (
+                        <img className={style.userImage} src={userInfoStore.userInfo.imageUrl} />
+                    ) : (
+                        <Link to={{ pathname: '/login', state: { prevPath: location.pathname } }}>
+                            <button className={style.loginBtn}>
+                                <i className="far fa-user-circle"></i>
+                                <span>로그인</span>
+                            </button>
+                        </Link>
+                    )}
                 </div>
             </header>
             {/* 메뉴 목록 */}

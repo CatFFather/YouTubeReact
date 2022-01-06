@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react';
 import style from './css/header.module.css';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useHistory, useLocation, Link } from 'react-router-dom';
 
 // COMPONENT
 import MenuList from './MenuList';
@@ -10,6 +10,8 @@ import SearchInputMobile from '../components/search/SearchInputMobile';
 // 상단 검색 헤더
 function Header() {
     const history = useHistory();
+    const location = useLocation();
+    console.log(location);
     const headerWrap = useRef();
     const [menuOpen, setMenuOpen] = useState(false); // 사이드 메뉴 오픈 여부
     const [mobileSearchModal, setMobileSearchModal] = useState(false); // 모바일 모달창 오픈 여부
@@ -69,10 +71,16 @@ function Header() {
                     )}
                 </div>
                 <div className={style.headerRight}>
-                    <button className={style.loginBtn} onClick={() => history.push('/login')}>
-                        <i className="far fa-user-circle"></i>
-                        <span>로그인</span>
-                    </button>
+                    <Link to={{ pathname: '/login', state: { prevPath: location.pathname } }}>
+                        {/* <button className={style.loginBtn} onClick={() => history.push('/login')}>
+                            <i className="far fa-user-circle"></i>
+                            <span>로그인</span>
+                        </button> */}
+                        <button className={style.loginBtn}>
+                            <i className="far fa-user-circle"></i>
+                            <span>로그인</span>
+                        </button>
+                    </Link>
                 </div>
             </header>
             {/* 메뉴 목록 */}

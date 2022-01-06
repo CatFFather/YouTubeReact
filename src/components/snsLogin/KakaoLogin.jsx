@@ -1,6 +1,9 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 
+// CSS
+import style from './css/snsLogin.module.css';
+
 // SERVICE
 import kakaoApiService from '../../service/kakaoApiService';
 
@@ -17,8 +20,8 @@ function KakaoLogin(props) {
                 kakaoApiService.kakaoUserInfo({
                     success: function (response) {
                         console.log('get kakaoUserInfo-success!!', response);
-                        // 로그인 후 이동
-                        history.push('/mostPopularList');
+                        // 로그인 후 이전 페이지로 이동
+                        history.push(history.location.state && history.location.state.prevPath);
                     },
                     fail: function (error) {
                         console.log('get kakaoUserInfo-fail!!', error);
@@ -33,7 +36,10 @@ function KakaoLogin(props) {
 
     return (
         <>
-            <img onClick={kakaoLogin} src="/images/kakao_login.png" />
+            <button className={`${style.sns_button_common} ${style.kakao_btn}`} onClick={kakaoLogin}>
+                <img className={style.sns_logo} src="/images/kakao_logo.png" />
+                <p className={style.sns_title}>카카오로 시작하기</p>
+            </button>
         </>
     );
 }

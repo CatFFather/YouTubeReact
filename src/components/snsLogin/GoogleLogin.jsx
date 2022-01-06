@@ -1,21 +1,35 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import { GoogleLogin } from 'react-google-login';
 
+// CSS
+import style from './css/snsLogin.module.css';
+
 function GoogleLoginBtn(props) {
-    const clientId = '762622649654-1kglmbfg1fgrrt47kjeu846rsamn4srg.apps.googleusercontent.com';
+    const history = useHistory();
+    const clientId = process.env.REACT_APP_GOOGLEAUTH_API_ID;
     function loginSuccess(res) {
-        console.log('구글 로그인 성공!');
-        alert('구글 로그인 성공!');
-        console.log(res);
+        console.log('구글 로그인 성공!', res);
+        // 로그인 후 이전 페이지로 이동
+        history.push(history.location.state && history.location.state.prevPath);
     }
     function loginFailure(err) {
-        console.log('구글 로그인 실패!');
-        alert('구글 로그인 실패!');
-        console.error(err);
+        console.log('구글 로그인 실패!', err);
     }
+
     return (
         <>
-            <GoogleLogin clientId={clientId} buttonText="Google로 로그인" onSuccess={loginSuccess} onFailure={loginFailure} />
+            <GoogleLogin
+                clientId={clientId}
+                onSuccess={loginSuccess}
+                onFailure={loginFailure}
+                render={(renderProps) => (
+                    <button className={`${style.sns_button_common} ${style.google_btn}`} onClick={renderProps.onClick}>
+                        <img className={style.sns_logo} src="/images/google_logo.png" />
+                        <p className={style.sns_title}>Google로 시작하기</p>
+                    </button>
+                )}
+            />
         </>
     );
 }

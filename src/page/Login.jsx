@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { Link } from 'react-router-dom';
 // CSS
 import style from './css/login.module.css';
 
@@ -13,14 +13,16 @@ function Login(props) {
         <>
             <section className={style.container}>
                 <div className={style.wrap}>
-                    <div>main Image onClick</div>
-                    <ul>
+                    <Link to="/">
+                        <img className={style.logo} src="/images/login_logo.png" />
+                    </Link>
+                    <ul className={style.snsLoginList}>
                         <li>
                             <GoogleLogin />
                         </li>
-                        <li>
+                        {/* <li>
                             <GoogleLogout />
-                        </li>
+                        </li> */}
                         <li>
                             <KakaoLogin />
                         </li>

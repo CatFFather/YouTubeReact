@@ -11,7 +11,6 @@ import SearchInputMobile from '../components/search/SearchInputMobile';
 function Header() {
     const history = useHistory();
     const location = useLocation();
-    console.log(location);
     const headerWrap = useRef();
     const [menuOpen, setMenuOpen] = useState(false); // 사이드 메뉴 오픈 여부
     const [mobileSearchModal, setMobileSearchModal] = useState(false); // 모바일 모달창 오픈 여부
@@ -72,10 +71,6 @@ function Header() {
                 </div>
                 <div className={style.headerRight}>
                     <Link to={{ pathname: '/login', state: { prevPath: location.pathname } }}>
-                        {/* <button className={style.loginBtn} onClick={() => history.push('/login')}>
-                            <i className="far fa-user-circle"></i>
-                            <span>로그인</span>
-                        </button> */}
                         <button className={style.loginBtn}>
                             <i className="far fa-user-circle"></i>
                             <span>로그인</span>

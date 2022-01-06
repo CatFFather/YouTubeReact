@@ -8,7 +8,7 @@ import GoogleLogin from '../components/snsLogin/GoogleLogin';
 import GoogleLogout from '../components/snsLogin/GoogleLogout';
 import KakaoLogin from '../components/snsLogin/KakaoLogin';
 
-function Login(props) {
+function Login() {
     return (
         <>
             <section className={style.container}>
@@ -16,16 +16,17 @@ function Login(props) {
                     <Link to="/">
                         <img className={style.logo} src="/images/login_logo.png" />
                     </Link>
+                    {/* sns 리스트 */}
                     <ul className={style.snsLoginList}>
                         <li>
                             <GoogleLogin />
                         </li>
-                        {/* <li>
-                            <GoogleLogout />
-                        </li> */}
                         <li>
                             <KakaoLogin />
                         </li>
+                        {/* <li>
+                            <GoogleLogout />
+                        </li> */}
                     </ul>
                 </div>
             </section>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import useStroe from '../../stores/useStore';
-
+import { setAccess_token, setLoginSnsInfo } from '../../service/localStorageService';
 // CSS
 import style from './css/snsLogin.module.css';
 
@@ -31,6 +31,8 @@ function KakaoLogin(props) {
                             imageUrl: info.properties.thumbnail_image,
                         };
                         userInfoStore.setUserInfo(loginInfo);
+                        setLoginSnsInfo(loginInfo.login_type);
+                        setAccess_token(login.access_token);
                         // 로그인 후 이전 페이지로 이동
                         history.push(history.location.state && history.location.state.prevPath);
                     },

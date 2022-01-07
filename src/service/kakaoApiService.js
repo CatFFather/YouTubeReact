@@ -54,9 +54,21 @@ const kakaoUserInfo = (params) => {
     });
 };
 
+// 카카오 로그아웃
+const kakaoLogout = (callback) => {
+    if (!Kakao.Auth.getAccessToken()) {
+        console.log('Not logged in.');
+        return;
+    }
+    Kakao.Auth.logout(function () {
+        callback();
+    });
+};
+
 export default {
     getLanguageDetect, // 인기 목록
     getLanguagTranslate, // 번역 하기
     kakaoLoginPage, // 카카오 로그인 페이지로 이동(팝업)
     kakaoUserInfo, // 현재 카카오로 로그인한 유저 정보
+    kakaoLogout, // 카카오 로그아웃
 };

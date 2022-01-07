@@ -2,13 +2,13 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { GoogleLogin } from 'react-google-login';
 import useStroe from '../../stores/useStore';
+import { setAccess_token, setLoginSnsInfo } from '../../service/localStorageService';
 
 // CSS
 import style from './css/snsLogin.module.css';
 
 function GoogleLoginBtn(props) {
     const { userInfoStore } = useStroe();
-    console.log(userInfoStore);
 
     const history = useHistory();
     const clientId = process.env.REACT_APP_GOOGLEAUTH_API_ID;
@@ -22,6 +22,8 @@ function GoogleLoginBtn(props) {
             imageUrl: res.profileObj.imageUrl,
         };
         userInfoStore.setUserInfo(loginInfo);
+        setLoginSnsInfo(loginInfo.login_type);
+        setAccess_token(res.accessToken);
         // 로그인 후 이전 페이지로 이동
         history.push(history.location.state && history.location.state.prevPath);
     }

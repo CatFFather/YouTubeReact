@@ -1,4 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
+import { observer } from 'mobx-react';
 import style from './css/header.module.css';
 import { useHistory, useLocation, Link } from 'react-router-dom';
 import useStroe from '../stores/useStore';
@@ -9,7 +10,7 @@ import SearchInputWeb from '../components/search/SearchInputWeb';
 import SearchInputMobile from '../components/search/SearchInputMobile';
 
 // 상단 검색 헤더
-function Header() {
+const Header = observer(() => {
     const history = useHistory();
     const location = useLocation();
     const { userInfoStore } = useStroe();
@@ -73,7 +74,7 @@ function Header() {
                                 <img src="/images/btn_search.svg" />
                             </button>
                             {userInfoStore.userInfo.imageUrl ? (
-                                <img className={style.userImage} src={userInfoStore.userInfo.imageUrl} />
+                                <img className={style.userImage} src={userInfoStore.userInfo.imageUrl} onClick={userInfoStore.logout} />
                             ) : (
                                 <Link to={{ pathname: '/login', state: { prevPath: location.pathname } }}>
                                     <i className="far fa-user-circle"></i>
@@ -85,7 +86,7 @@ function Header() {
                 {/* 오른쪽 로그인(모바일은 none) */}
                 <div className={style.headerRight}>
                     {userInfoStore.userInfo.imageUrl ? (
-                        <img className={style.userImage} src={userInfoStore.userInfo.imageUrl} />
+                        <img className={style.userImage} src={userInfoStore.userInfo.imageUrl} onClick={userInfoStore.logout} />
                     ) : (
                         <Link to={{ pathname: '/login', state: { prevPath: location.pathname } }}>
                             <button className={style.loginBtn}>
@@ -106,6 +107,6 @@ function Header() {
             {windowWidth < 780 && <SearchInputMobile ref={headerWrap} mobileSearchModal={mobileSearchModal} setMobileSearchModal={setMobileSearchModal} />}
         </>
     );
-}
+});
 
 export default Header;

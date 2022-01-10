@@ -12,6 +12,18 @@ function UserInfoMenu(props) {
         userInfoStore.logout();
         handleInfoMenu();
     }
+    useEffect(() => {
+        window.addEventListener('click', handleCloseModal);
+        return () => {
+            window.removeEventListener('click', handleCloseModal);
+        };
+    }, []);
+
+    function handleCloseModal(e) {
+        if (userInfowrap.current && !userInfowrap.current.contains(e.target)) {
+            handleInfoMenu();
+        }
+    }
     return (
         <>
             <ul ref={userInfowrap} className={style.userInfowrap}>

@@ -6,6 +6,7 @@ import useStroe from '../stores/useStore';
 
 // COMPONENT
 import MenuList from './MenuList';
+import UserInfoMenu from './UserInfoMenu';
 import SearchInputWeb from '../components/search/SearchInputWeb';
 import SearchInputMobile from '../components/search/SearchInputMobile';
 
@@ -17,6 +18,7 @@ const Header = observer(() => {
     const headerWrap = useRef();
     const [menuOpen, setMenuOpen] = useState(false); // 사이드 메뉴 오픈 여부
     const [mobileSearchModal, setMobileSearchModal] = useState(false); // 모바일 모달창 오픈 여부
+    const [userInfoMenuOpen, setUserInfoMenuOpen] = useState(false); // 유저 정보 메뉴 오픈 여부
 
     // 윈도우 화면 변화 감지
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
@@ -43,6 +45,10 @@ const Header = observer(() => {
         setMobileSearchModal(true);
     }
 
+    // 3. 정보 메뉴 클릭
+    function handleInfoMenu() {
+        setUserInfoMenuOpen(!userInfoMenuOpen);
+    }
     return (
         <>
             {/* 상단 검색 헤더 */}
@@ -74,7 +80,10 @@ const Header = observer(() => {
                                 <img src="/images/btn_search.svg" />
                             </button>
                             {userInfoStore.userInfo.imageUrl ? (
-                                <img className={style.userImage} src={userInfoStore.userInfo.imageUrl} onClick={userInfoStore.logout} />
+                                <>
+                                    <img className={style.userImage} src={userInfoStore.userInfo.imageUrl} onClick={handleInfoMenu} />
+                                    {userInfoMenuOpen == true && <UserInfoMenu handleInfoMenu={handleInfoMenu} />}
+                                </>
                             ) : (
                                 <Link to={{ pathname: '/login', state: { prevPath: location.pathname } }}>
                                     <i className="far fa-user-circle"></i>
@@ -86,7 +95,10 @@ const Header = observer(() => {
                 {/* 오른쪽 로그인(모바일은 none) */}
                 <div className={style.headerRight}>
                     {userInfoStore.userInfo.imageUrl ? (
-                        <img className={style.userImage} src={userInfoStore.userInfo.imageUrl} onClick={userInfoStore.logout} />
+                        <>
+                            <img className={style.userImage} src={userInfoStore.userInfo.imageUrl} onClick={handleInfoMenu} />
+                            {userInfoMenuOpen == true && <UserInfoMenu handleInfoMenu={handleInfoMenu} />}
+                        </>
                     ) : (
                         <Link to={{ pathname: '/login', state: { prevPath: location.pathname } }}>
                             <button className={style.loginBtn}>

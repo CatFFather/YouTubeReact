@@ -28,6 +28,12 @@
 .logo {
     cursor: pointer;
 }
+.userImage {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    cursor: pointer;
+}
 .loginBtn {
     width: 100%;
     border: 1px solid #065fd4;
@@ -51,6 +57,10 @@
 @media screen and (max-width: 780px) {
     .headerCenter {
         width: initial;
+    }
+    .headerCenter i {
+        font-size: 23px;
+        color: #065fd4;
     }
     .headerRight {
         display: none;

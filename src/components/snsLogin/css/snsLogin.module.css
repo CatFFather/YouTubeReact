@@ -1,0 +1,30 @@
+/* 버튼 공통 */
+.sns_button_common {
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    min-width: 300px;
+    cursor: pointer;
+    height: 45px;
+    border-radius: 8px;
+    border: none;
+    font-size: 14px;
+    font-family: 'Noto Sans KR';
+}
+.sns_logo {
+    width: 20px;
+    padding: 0px 3px;
+}
+.sns_title {
+    flex: 1;
+}
+
+/* 카카오 로그인 */
+.kakao_btn {
+    background-color: #fee500;
+}
+
+/* 구글 로그인 */
+.google_btn {
+    background-color: #f5f5f5;
+}

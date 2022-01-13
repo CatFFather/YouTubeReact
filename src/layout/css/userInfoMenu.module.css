@@ -1,0 +1,42 @@
+/* userInfoMenu.module */
+.userInfowrap {
+    background-color: #ffffff;
+    position: fixed;
+    top: 55px;
+    right: 10px;
+    display: flex;
+    flex-direction: column;
+    min-width: 300px;
+    border: #e5e5e5 1px solid;
+}
+.userInfowrap li {
+    padding: 12px;
+    display: flex;
+}
+.userInfowrap li:hover {
+    background: #e5e5e5;
+}
+.myInfoWrap {
+    border-bottom: #e5e5e5 1px solid;
+}
+.myInfoWrap img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+.myInfo {
+    margin-left: 10px;
+}
+.management {
+    color: #065fd4;
+    font-size: 14px;
+}
+.logout {
+    cursor: pointer;
+}
+.logout img {
+    width: 24px;
+}
+.logout p {
+    margin-left: 16px;
+}
